@@ -22,10 +22,10 @@ export default function CreateWallet() {
           <div>
             <h3 className="h3">Create wallet</h3>
             <p className="p">
-              Don't risk losing your funds. Protect your wallet by saving your
+              {`Don't risk losing your funds. Protect your wallet by saving your
               Secret Recovery Phrase in a place you trust. It's the only way to
               recover your wallet if you get locked out of the app or get a new
-              device.
+              device.`}
             </p>
           </div>
         ) : (
