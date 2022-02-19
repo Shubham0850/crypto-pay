@@ -1,0 +1,149 @@
+// FONTS
+@font-face {
+    font-family: "Euclid Medium";
+    src: url("/fonts/Euclid Circular B Medium.ttf");
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Euclid SemiBold";
+    src: url("/fonts/Euclid Circular B SemiBold.ttf");
+    font-style: normal;
+    font-weight: 400;
+}
+
+// MIXINS
+@mixin center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+// VARIABLES
+$font-primary: "Euclid Medium";
+$font-secondary: "Euclid SemiBold";
+
+// color
+$color-font: #333333;
+$color-blue: #027cd6;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: $font-primary;
+}
+
+// TYPOGRAPHY
+.h1 {
+    font-family: $font-secondary;
+    font-size: 48px;
+}
+.p {
+    font-family: $font-primary;
+    font-size: 16px;
+    line-height: 22px;
+    color: $color-font;
+}
+.h3 {
+    font-family: $font-secondary;
+    font-size: 24px;
+    color: $color-font;
+}
+
+@media only screen and (max-width: 600px) {
+    .h1 {
+        font-size: 2em !important;
+    }
+    .p {
+        font-size: 16px;
+    }
+}
+
+// BASE STYLE
+.cont {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+.icon {
+    font-size: 25px;
+    margin: 0 10px;
+}
+.btns{
+    width: 100%;
+}
+.btn {
+    width: 100%;
+    max-width: 400px;
+    margin: 10px 0;
+    padding: 10px 30px;
+    outline: none;
+    border: 2px solid $color-blue;
+    border-radius: 25px;
+    overflow: hidden;
+    font-size: 15px;
+
+    color: $color-blue;
+    cursor: pointer;
+
+    background: transparent;
+    transition: all 0.5s ease;
+
+    &:hover {
+        transform: translateY(-5px);
+    }
+
+    &--fill {
+        background-color: $color-blue;
+        color: #fff;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .hide-on-phone {
+        display: none !important;
+    }
+    .sm-mb-5 {
+        margin-bottom: 30px;
+    }
+}
+
+.hide-on-pc {
+    @media only screen and (min-width: 601px) {
+        display: none;
+    }
+}
+
+// OVERWRITE VALUE
+a {
+    text-decoration: none;
+    color: rgb(42, 41, 41);
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
+ion-icon {
+    font-size: 25px;
+    font-weight: bold;
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: radial-gradient(18.02% 49.93% at 55.58% 50.07%, #b1d26f 0%, #b1d26f 0.01%, #60e7ce 100%);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #fff;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: transparent;
+}
