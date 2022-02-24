@@ -11,4 +11,29 @@
         padding: 20px;
         text-align: center;
     }
+
+    .active{
+        border-top: 2px solid $color-blue;
+        color: $color-blue;
+    }
+}
+
+.token-card{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 20px;
+    padding: 10px;
+
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    border-radius: 15px;
+
+    img{
+        width: 50px;
+        margin-right: 10px;
+    }
+
+    &__name{
+        min-width: 65%;
+    }
 }

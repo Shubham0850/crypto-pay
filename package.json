@@ -10,7 +10,9 @@
   "dependencies": {
     "@solana/web3.js": "^1.35.1",
     "bip39": "^3.0.4",
-    "next": "12.1.0",
+    "crypto-price-getter": "^1.0.2",
+    "next": "12.1.0", 
+    "next-pwa": "^5.4.4",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-hot-toast": "^2.2.0",
@@ -20,5 +22,6 @@
   "devDependencies": {
     "eslint": "8.9.0",
     "eslint-config-next": "12.1.0"
-  }
+  },
+  "proxy": "https://pro-api.coinmarketcap.com/"
 }

@@ -10,8 +10,7 @@ export default function CreateWallet() {
   const router = useRouter();
   const [phrase, setPhrase] = useState();
   const [copy, setCopy] = useState("Copy Phrase");
-  const {setAccount} = useContext(GlobalContext);
-
+  const { setAccount } = useContext(GlobalContext);
 
   const generatePhrase = () => {
     // Generating mnemonic phrase
@@ -27,6 +26,17 @@ export default function CreateWallet() {
     // Generate new Keypair from seed ( new account )
     const newAccount = Keypair.fromSeed(seed); // return keypair
 
+    console.log(newAccount);
+//     _keypair:
+// publicKey: 
+// secretKey: Uint8Array(64) 
+// [[Prototype]]: Object
+// publicKey: PublicKey
+// secretKey: Uint8Array(64)
+
+    // save account on localstorage for now
+    window.localStorage.setItem("wallet", JSON.stringify(newAccount));
+
     // store newAccount in global state
     setAccount(newAccount);
 
@@ -40,7 +50,7 @@ export default function CreateWallet() {
 
   return (
     <div className="intro create-wallet">
-       <Toaster position="top-center" reverseOrder={false} />
+      <Toaster position="top-center" reverseOrder={false} />
       <div className="intro__title">
         <img src="/logo2.png" alt="logo" />
 
@@ -84,7 +94,7 @@ export default function CreateWallet() {
           </button>
         ) : (
           <button className="btn btn--fill" onClick={createAccount}>
-           Create Wallet
+            Create Wallet
           </button>
         )}
       </div>

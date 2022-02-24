@@ -1,15 +1,16 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { GlobalContext } from "../context";
 import { BsMenuApp, BsCreditCard2Back } from "react-icons/bs";
 import { BiCopy } from "react-icons/bi";
 import { FaParachuteBox } from "react-icons/fa";
 import { ImArrowDownLeft2, ImArrowUpRight2 } from "react-icons/im";
-import { AiOutlineSwap, AiOutlineDownload } from "react-icons/ai";
 import HomeTab from "../components/HomeTab";
 import toast, { Toaster } from "react-hot-toast";
+import { handleAirdrop } from "../utils";
 
 export default function Wallet() {
-  const { account, balance, setBalance, network } = useContext(GlobalContext);
+  const { account, balance, setBalance, network, price } = useContext(GlobalContext);
+  const [airdropLoading, setAirdropLoading] = useState(false);
 
   const address = account?.publicKey.toString();
   const walletAddress = `0x${address?.slice(0, 6)}...${address?.slice(-4)}`;
@@ -17,6 +18,19 @@ export default function Wallet() {
   const copyAddress = () => {
     navigator.clipboard.writeText(address);
     toast.success("Address Copied to clipboard");
+  };
+
+  const airdrop = async () => {
+    setAirdropLoading(true);
+    const res = await handleAirdrop(network, account);
+
+    if (typeof res === "number") {
+      setBalance(res);
+    }
+
+    setAirdropLoading(false);
+
+    console.log(res);
   };
 
   return (
@@ -44,7 +58,7 @@ export default function Wallet() {
         </div>
         <div>
           <h3 className="h3">Account 1</h3>
-          <p className="p balance">₹0.0</p>
+          <p className="p balance">$ {price * balance}</p>
           <span className="address" onClick={copyAddress}>
             {walletAddress + "  -"} <BiCopy />
           </span>
@@ -70,10 +84,10 @@ export default function Wallet() {
             <p className="p">Send</p>
           </div>
           <div>
-            <span className="b">
+            <span className="b" onClick={airdrop}>
               <FaParachuteBox />
             </span>
-            <p className="p">Airdrop</p>
+            <p className="p">{airdropLoading ? "Loading.." : "Airdrop"}</p>
           </div>
         </div>
       </div>
