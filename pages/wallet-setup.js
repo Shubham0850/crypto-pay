@@ -11,7 +11,7 @@ export default function WalletSetup() {
         <p className="p">Import an existing wallet or create a new one</p>
       </div>
 
-      <img src="/intro.webp" alt="intro" />
+      <img src="/banner2.png" alt="intro" />
 
       <div>
         <Link href="/wallet-setup">

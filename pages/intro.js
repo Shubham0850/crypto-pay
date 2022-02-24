@@ -14,7 +14,7 @@ export default function Intro() {
         </p>
       </div>
 
-      <img src="/intro.webp" alt="intro" />
+      <img src="/banner2.png" alt="intro" />
 
       <Link href="/wallet-setup">
         <button className="btn">Get Started</button>

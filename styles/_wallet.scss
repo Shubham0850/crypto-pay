@@ -47,13 +47,13 @@
             justify-content: space-around;
             .b{
                 display: inline-block;
-                width: 50px;
-                height: 50px;
+                width: 40px;
+                height: 40px;
                 overflow: hidden;
                 border-radius: 50%;
                 background-color: $color-blue;
                 color: #fff;
-                font-size: 25px;
+                font-size: 20px;
 
                 text-align: center;
                 margin: 5px;
@@ -61,6 +61,9 @@
                 display: flex;
                 justify-content: center;
                 align-items: center;
+            }
+            .p{
+                font-size: 14px;
             }
         }
     }

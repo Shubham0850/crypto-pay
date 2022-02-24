@@ -68,7 +68,7 @@ export default function CreateWallet() {
       {phrase ? (
         <div className="secret-phrase-box">{phrase}</div>
       ) : (
-        <img src="/intro.webp" alt="intro" />
+        <img src="/banner2.png" alt="intro" />
       )}
 
       <div className="btns">

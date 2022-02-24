@@ -78,7 +78,7 @@ $color-gray: #ededed;
     width: 100%;
     max-width: 400px;
     margin: 10px 0;
-    padding: 10px 30px;
+    padding: 12px 30px;
     outline: none;
     border: 2px solid $color-blue;
     border-radius: 25px;
@@ -96,7 +96,9 @@ $color-gray: #ededed;
     }
 
     &--fill {
-        background-color: $color-blue;
+        // background-color: $color-blue;
+        border: none;
+        background: linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(87,160,197,1) 50%);
         color: #fff;
     }
 }

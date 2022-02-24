@@ -46,7 +46,7 @@ export default function Wallet() {
           <h3 className="h3">Account 1</h3>
           <p className="p balance">₹0.0</p>
           <span className="address" onClick={copyAddress}>
-            {walletAddress} <BiCopy />
+            {walletAddress + "  -"} <BiCopy />
           </span>
         </div>
 
@@ -55,25 +55,25 @@ export default function Wallet() {
             <span className="b">
               <ImArrowDownLeft2 />
             </span>
-            Receive
+            <p className="p">Receive</p>
           </div>
           <div>
             <span className="b">
               <BsCreditCard2Back />
             </span>
-            Buy
+            <p className="p">Buy</p>
           </div>
           <div>
             <span className="b">
               <ImArrowUpRight2 />
             </span>
-            Send
+            <p className="p">Send</p>
           </div>
           <div>
             <span className="b">
               <FaParachuteBox />
             </span>
-            Airdrop
+            <p className="p">Airdrop</p>
           </div>
         </div>
       </div>
