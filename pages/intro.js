@@ -6,7 +6,7 @@ export default function Intro() {
   return (
     <div className="intro">
       <div className="intro__title">
-        <Image src="/logo.svg" alt="logo" width={200} height={50} />
+        <img src="/logo2.png" alt="logo" />
         <h3 className="h3">Welcome to CryptoPay</h3>
         <p className="p">
           Trusted by people, CryptoPay is a secure wallet makeing the

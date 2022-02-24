@@ -8,10 +8,13 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@solana/web3.js": "^1.35.1",
     "bip39": "^3.0.4",
     "next": "12.1.0",
     "react": "17.0.2",
     "react-dom": "17.0.2",
+    "react-hot-toast": "^2.2.0",
+    "react-icons": "^4.3.1",
     "sass": "^1.49.8"
   },
   "devDependencies": {

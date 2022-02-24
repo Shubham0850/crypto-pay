@@ -1,0 +1,14 @@
+.home-tab{
+    width: 100%;
+    border-top: 1px solid $color-gray;
+
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    &__tab{
+        width: 50%;
+        padding: 20px;
+        text-align: center;
+    }
+}

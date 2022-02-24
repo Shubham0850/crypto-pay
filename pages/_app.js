@@ -1,7 +1,12 @@
-import '../styles/main.scss'
+import { GlobalProvider } from "../context";
+import "../styles/main.scss";
 
 function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
+  return (
+    <GlobalProvider>
+      <Component {...pageProps} />
+    </GlobalProvider>
+  );
 }
 
-export default MyApp
+export default MyApp;

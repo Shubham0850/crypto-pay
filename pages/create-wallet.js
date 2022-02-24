@@ -1,10 +1,17 @@
 import Image from "next/image";
 import * as Bip39 from "bip39";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { Keypair } from "@solana/web3.js";
+import { GlobalContext } from "../context";
+import { useRouter } from "next/router";
+import toast, { Toaster } from "react-hot-toast";
 
 export default function CreateWallet() {
-  const [loading, setLoading] = useState(false);
+  const router = useRouter();
   const [phrase, setPhrase] = useState();
+  const [copy, setCopy] = useState("Copy Phrase");
+  const {setAccount} = useContext(GlobalContext);
+
 
   const generatePhrase = () => {
     // Generating mnemonic phrase
@@ -13,10 +20,29 @@ export default function CreateWallet() {
     setPhrase(generatedMnemonic);
   };
 
+  const createAccount = () => {
+    // convert the mnemonic to seed bytes and making sure it is of 32-bytes
+    const seed = Bip39.mnemonicToSeedSync(phrase).slice(0, 32); // return Uint8Array(32)
+
+    // Generate new Keypair from seed ( new account )
+    const newAccount = Keypair.fromSeed(seed); // return keypair
+
+    // store newAccount in global state
+    setAccount(newAccount);
+
+    router.push("/wallet");
+  };
+
+  const copyPhrase = () => {
+    navigator.clipboard.writeText(phrase);
+    toast.success("Phrase copied to clipboard");
+  };
+
   return (
     <div className="intro create-wallet">
+       <Toaster position="top-center" reverseOrder={false} />
       <div className="intro__title">
-        <Image src="/logo.svg" alt="logo" width={200} height={50} />
+        <img src="/logo2.png" alt="logo" />
 
         {!phrase ? (
           <div>
@@ -46,15 +72,19 @@ export default function CreateWallet() {
       )}
 
       <div className="btns">
-        {phrase && <button className="btn">Copy phrase</button>}
+        {phrase && (
+          <button className="btn" onClick={copyPhrase}>
+            {copy}
+          </button>
+        )}
 
         {!phrase ? (
           <button className="btn btn--fill" onClick={generatePhrase}>
             Generate Phrase
           </button>
         ) : (
-          <button className="btn btn--fill" onClick={generatePhrase}>
-            Finish
+          <button className="btn btn--fill" onClick={createAccount}>
+           Create Wallet
           </button>
         )}
       </div>

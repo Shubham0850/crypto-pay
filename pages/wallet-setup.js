@@ -6,7 +6,7 @@ export default function WalletSetup() {
   return (
     <div className="intro wallet-setup">
       <div className="intro__title">
-        <Image src="/logo.svg" alt="logo" width={200} height={50} />
+        <img src="/logo2.png" alt="logo"  />
         <h3 className="h3">Wallet setup</h3>
         <p className="p">Import an existing wallet or create a new one</p>
       </div>
