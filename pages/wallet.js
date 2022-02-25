@@ -4,13 +4,15 @@ import { BsMenuApp, BsCreditCard2Back } from "react-icons/bs";
 import { BiCopy } from "react-icons/bi";
 import { FaParachuteBox } from "react-icons/fa";
 import { ImArrowDownLeft2, ImArrowUpRight2 } from "react-icons/im";
+import { AiOutlineLoading } from "react-icons/ai";
 import HomeTab from "../components/HomeTab";
 import toast, { Toaster } from "react-hot-toast";
 import { handleAirdrop } from "../utils";
 import Menu from "../components/Menu";
 
 export default function Wallet() {
-  const { account, balance, setBalance, network, price } = useContext(GlobalContext);
+  const { account, balance, setBalance, network, price } =
+    useContext(GlobalContext);
   const [airdropLoading, setAirdropLoading] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -48,13 +50,13 @@ export default function Wallet() {
       <Toaster position="bottom-center" reverseOrder={false} />
 
       {menuOpen && (
-          <div className="navigation__menu">
-            <div className="navigation__menu__content">
-              <Menu />
-            </div>
-            <div className="navigation__menu__close" onClick={closeMenu}></div>
+        <div className="navigation__menu">
+          <div className="navigation__menu__content">
+            <Menu />
           </div>
-        )}
+          <div className="navigation__menu__close" onClick={closeMenu}></div>
+        </div>
+      )}
 
       <nav className="nav">
         <div className="menu" onClick={openMenu}>
@@ -105,9 +107,13 @@ export default function Wallet() {
           </div>
           <div>
             <span className="b" onClick={airdrop}>
-              <FaParachuteBox />
+              {airdropLoading ? (
+                <AiOutlineLoading className="loading" />
+              ) : (
+                <FaParachuteBox />
+              )}
             </span>
-            <p className="p">{airdropLoading ? "Loading.." : "Airdrop"}</p>
+            <p className="p">Airdrop</p>
           </div>
         </div>
       </div>

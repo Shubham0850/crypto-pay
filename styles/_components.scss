@@ -87,12 +87,11 @@
     }
 
     &__btns {
-        display: flex;
         padding: 20px 10px;
         border-bottom: 1px solid $color-gray;
 
         .btn {
-            margin: 5px;
+            margin: 5px 0;
             padding: 10px 15px;
         }
     }

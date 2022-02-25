@@ -25,7 +25,7 @@ $font-secondary: "Euclid SemiBold";
 
 // color
 $color-font: #333333;
-$color-blue: #3C81A6;
+$color-blue: #249192;
 $color-gray: #ededed;
 
 * {
@@ -71,7 +71,7 @@ $color-gray: #ededed;
     font-size: 25px;
     margin: 0 10px;
 }
-.btns{
+.btns {
     width: 100%;
 }
 .btn {
@@ -91,15 +91,14 @@ $color-gray: #ededed;
     background: transparent;
     transition: all 0.5s ease;
 
-
     &--fill {
         // background-color: $color-blue;
         border: none;
-        background: linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(87,160,197,1) 50%);
+        background: linear-gradient(0deg, rgba(34, 193, 195, 1) 0%, rgba(87, 160, 197, 1) 50%);
         color: #fff;
     }
 }
-.inp{
+.inp {
     border: none;
     outline: none;
     font-family: $font-primary;
@@ -151,4 +150,18 @@ ion-icon {
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
     background: transparent;
+}
+
+.loading {
+    animation: rotation 2s infinite linear;
+}
+
+// Animations
+@keyframes rotation {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(359deg);
+    }
 }

@@ -20,7 +20,7 @@ export default function Menu() {
           Send
           <FiArrowUpRight />{" "}
         </button>
-        <button className="btn">
+        <button className="btn btn--fill">
           Add Fund <FiArrowDownLeft />
         </button>
       </div>
