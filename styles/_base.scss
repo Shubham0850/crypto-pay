@@ -91,9 +91,6 @@ $color-gray: #ededed;
     background: transparent;
     transition: all 0.5s ease;
 
-    &:hover {
-        transform: translateY(-5px);
-    }
 
     &--fill {
         // background-color: $color-blue;
@@ -101,6 +98,11 @@ $color-gray: #ededed;
         background: linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(87,160,197,1) 50%);
         color: #fff;
     }
+}
+.inp{
+    border: none;
+    outline: none;
+    font-family: $font-primary;
 }
 
 @media only screen and (max-width: 600px) {

@@ -7,12 +7,22 @@ import { ImArrowDownLeft2, ImArrowUpRight2 } from "react-icons/im";
 import HomeTab from "../components/HomeTab";
 import toast, { Toaster } from "react-hot-toast";
 import { handleAirdrop } from "../utils";
+import Menu from "../components/Menu";
 
 export default function Wallet() {
   const { account, balance, setBalance, network, price } = useContext(GlobalContext);
   const [airdropLoading, setAirdropLoading] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
-  const address = account?.publicKey.toString();
+  const openMenu = () => {
+    setMenuOpen(true);
+  };
+
+  const closeMenu = () => {
+    setMenuOpen(false);
+  };
+
+  const address = account?.publicKey?.toString();
   const walletAddress = `0x${address?.slice(0, 6)}...${address?.slice(-4)}`;
 
   const copyAddress = () => {
@@ -36,8 +46,18 @@ export default function Wallet() {
   return (
     <div className="wallet">
       <Toaster position="bottom-center" reverseOrder={false} />
+
+      {menuOpen && (
+          <div className="navigation__menu">
+            <div className="navigation__menu__content">
+              <Menu />
+            </div>
+            <div className="navigation__menu__close" onClick={closeMenu}></div>
+          </div>
+        )}
+
       <nav className="nav">
-        <div className="menu">
+        <div className="menu" onClick={openMenu}>
           <BsMenuApp className="icon" />
         </div>
 
