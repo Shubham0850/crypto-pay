@@ -54,7 +54,7 @@ $color-gray: #ededed;
 
 @media only screen and (max-width: 600px) {
     .h1 {
-        font-size: 2em !important;
+        // font-size: 2em !important;
     }
     .p {
         font-size: 16px;
@@ -91,11 +91,22 @@ $color-gray: #ededed;
     background: transparent;
     transition: all 0.5s ease;
 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
+
     &--fill {
         // background-color: $color-blue;
         border: none;
         background: linear-gradient(0deg, rgba(34, 193, 195, 1) 0%, rgba(87, 160, 197, 1) 50%);
         color: #fff;
+    }
+
+    .icon{
+        font-size: 25px;
+        margin-right: 10px;
     }
 }
 .inp {

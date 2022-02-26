@@ -4,7 +4,7 @@ import { BsMenuApp, BsCreditCard2Back } from "react-icons/bs";
 import { BiCopy } from "react-icons/bi";
 import { FaParachuteBox } from "react-icons/fa";
 import { ImArrowDownLeft2, ImArrowUpRight2 } from "react-icons/im";
-import { AiOutlineLoading } from "react-icons/ai";
+import { AiOutlineLoading, AiOutlineScan } from "react-icons/ai";
 import HomeTab from "../components/HomeTab";
 import toast, { Toaster } from "react-hot-toast";
 import { handleAirdrop } from "../utils";
@@ -119,6 +119,10 @@ export default function Wallet() {
       </div>
 
       <HomeTab />
+
+      <div className="s-pay">
+        <button disabled={true} className="btn btn--fill"><AiOutlineScan className="icon"/> Scan and Pay</button>
+      </div>
     </div>
   );
 }

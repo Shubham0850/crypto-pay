@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import Link from "next/link";
 
 import { IoWalletOutline } from "react-icons/io5";
@@ -7,8 +7,11 @@ import { GiShare } from "react-icons/gi";
 import { MdTravelExplore } from "react-icons/md";
 import { HiOutlineLogout } from "react-icons/hi";
 import { FiArrowUpRight, FiArrowDownLeft } from "react-icons/fi";
+import { GlobalContext } from "../context";
 
 export default function Menu() {
+  const {account} = useContext(GlobalContext);
+
   return (
     <div className="menu hide-on-pc">
       <div className="menu__logo">
@@ -41,7 +44,7 @@ export default function Menu() {
             <GiShare className="icon" /> Share my Public Address
           </a>
         </Link>
-        <Link href="/dental-care">
+        <Link href={`https://explorer.solana.com/address/&=${"0x"}?cluster=devnet`}>
           <a className="menu__link">
             <MdTravelExplore className="icon" /> View on solana explorer
           </a>

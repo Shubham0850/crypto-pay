@@ -1,4 +1,4 @@
-.intro{
+.intro {
     width: 100%;
     max-width: 600px;
     margin: 0px auto;
@@ -6,25 +6,24 @@
     min-height: 100vh;
     padding: 50px;
 
-
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-direction: column;
 
-    &__title{
-        .h3{
+    &__title {
+        .h3 {
             margin: 15px 0;
         }
     }
 
-    img{
+    img {
         width: 100%;
     }
 }
 
-.create-wallet{
-    .secret-phrase-box{
+.create-wallet {
+    .secret-phrase-box {
         border: 2px solid #ededed;
         border-radius: 25px;
         padding: 20px;
@@ -34,13 +33,12 @@
     }
 }
 
-.merchant{
-
-    &__enter-amount{
+.merchant {
+    &__enter-amount {
         padding: 50px;
         text-align: center;
 
-        .inp{
+        .inp {
             width: 80%;
             text-align: center;
             font-size: 50px;
@@ -48,33 +46,74 @@
         }
     }
 
-    &__spay{
-        p{
+    &__spay {
+        p {
             display: flex;
             align-items: center;
             justify-content: center;
 
             color: #888;
 
-            img{
+            img {
                 margin-left: 10px;
             }
         }
     }
 
-    .g-code{
+    .g-code {
         position: absolute;
         bottom: 20px;
         width: 100%;
         text-align: center;
 
-        .btn{
+        .btn {
             width: fit-content;
             margin: 10px auto;
-            box-shadow: rgba(87, 160, 197, 0.2) 0px 7px 29px 0px;
+        }
+    }
+}
 
-            // box-shadow: rgba(87, 160, 197, 0.2) 0px 4px 12px;
+.merchant-qr {
+    &__qr-box {
+        min-height: 90vh;
+        padding: 50px 30px;
+        text-align: center;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        .h1 {
+            font-size: 50px;
         }
 
+        img {
+            width: 100%;
+            margin: 50px 0;
+        }
+    }
+
+    .qr-code {
+        margin: 30px 0;
+    }
+
+    .status{
+        padding: 10px;
+        color: $color-blue;
+    }
+}
+
+.wallet {
+    .s-pay {
+        width: 100%;
+        position: absolute;
+        bottom: 20px;
+        left: 0;
+        text-align: center;
+
+        .btn {
+            width: fit-content;
+            margin: 0 auto;
+        }
     }
 }

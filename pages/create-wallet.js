@@ -20,6 +20,7 @@ export default function CreateWallet() {
   };
 
   const createAccount = () => {
+    toast.loading("Creating Account..");
     // convert the mnemonic to seed bytes and making sure it is of 32-bytes
     const seed = Bip39.mnemonicToSeedSync(phrase).slice(0, 32); // return Uint8Array(32)
 
