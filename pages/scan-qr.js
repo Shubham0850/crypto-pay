@@ -1,12 +1,14 @@
 import { parseURL } from "@solana/pay";
 import Link from "next/link";
-import { Router, useRouter } from "next/router";
+import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { MdArrowBackIos } from "react-icons/md";
-import { VscLoading } from "react-icons/vsc";
 import { QrReader } from "react-qr-reader";
+import { FiRotateCcw } from "react-icons/fi";
 
 export default function ScanQr() {
+  const [facingMode, setFacingMode] = useState("environment");
+
   const router = useRouter();
   const readCode = (url) => {
     const { recipient, amount, splToken, reference, label, message, memo } =
@@ -26,6 +28,14 @@ export default function ScanQr() {
     });
   };
 
+  const changeCam = () => {
+    if (facingMode === "environment") {
+      setFacingMode("user");
+    } else {
+      setFacingMode("environment");
+    }
+  };
+
   return (
     <div className="qr-code">
       <nav className="nav">
@@ -37,12 +47,13 @@ export default function ScanQr() {
 
         <h3>Scan Code</h3>
 
-        <div className="network">
-          <VscLoading className="loading icon" />
+        <div className="network" onClick={changeCam}>
+          <FiRotateCcw className="icon" />
         </div>
       </nav>
 
       <QrReader
+        facingMode={facingMode}
         onResult={(result, error) => {
           if (!!result) {
             readCode(result?.text);
