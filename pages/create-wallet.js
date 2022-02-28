@@ -1,11 +1,10 @@
-import Image from "next/image";
 import * as Bip39 from "bip39";
 import React, { useContext, useState } from "react";
 import { Keypair } from "@solana/web3.js";
 import { GlobalContext } from "../context";
 import { useRouter } from "next/router";
 import toast, { Toaster } from "react-hot-toast";
-import { decryptData, encryptData } from "../utils";
+import { encryptData } from "../utils";
 const bs58 = require("bs58");
 import Cookies from 'js-cookie'
 
@@ -13,7 +12,7 @@ export default function CreateWallet() {
   const router = useRouter();
   const [phrase, setPhrase] = useState();
   const [copy, setCopy] = useState("Copy Phrase");
-  const { setPrivateKey, setPublicKey } = useContext(GlobalContext);
+  const { setPublicKey } = useContext(GlobalContext);
 
   const generatePhrase = () => {
     // Generating mnemonic phrase

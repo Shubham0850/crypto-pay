@@ -10,12 +10,14 @@ import toast, { Toaster } from "react-hot-toast";
 import { handleAirdrop } from "../utils";
 import Menu from "../components/Menu";
 import withAuth from "../HOC/withAuth";
+import { useRouter } from "next/router";
 
 function Wallet() {
   const { publicKey, balance, setBalance, network, price } =
     useContext(GlobalContext);
   const [airdropLoading, setAirdropLoading] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const router = useRouter();
 
   const openMenu = () => {
     setMenuOpen(true);
@@ -44,6 +46,10 @@ function Wallet() {
 
     console.log(res);
   };
+
+  const scanQrCode = () => {
+      router.push("/scan-qr")
+  }
 
   return (
     <div className="wallet">
@@ -121,7 +127,7 @@ function Wallet() {
       <HomeTab />
 
       <div className="s-pay">
-        <button disabled={true} className="btn btn--fill"><AiOutlineScan className="icon"/> Scan and Pay</button>
+        <button onClick={scanQrCode} className="btn btn--fill"><AiOutlineScan className="icon"/> Scan and Pay</button>
       </div>
     </div>
   );

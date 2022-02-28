@@ -97,7 +97,7 @@
         margin: 30px 0;
     }
 
-    .status{
+    .status {
         padding: 10px;
         color: $color-blue;
     }
@@ -115,5 +115,55 @@
             width: fit-content;
             margin: 0 auto;
         }
+    }
+}
+
+.qr-code {
+    width: 100%;
+    height: 100vh;
+
+    .qr-code-cam {
+        width: 100%;
+        height: 100vh;
+
+        div {
+            height: 100vh;
+        }
+
+        video {
+            width: 100vw !important;
+            height: 100vh !important;
+
+            object-fit: cover;
+        }
+    }
+
+    .nav {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 10;
+
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 20px;
+        backdrop-filter: blur(10px);
+    }
+}
+
+.make-payment{
+
+    &__details{
+        width: 100%;
+        min-height: 90vh;
+        text-align: center;
+        padding: 50px;
+
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: space-between;
     }
 }
