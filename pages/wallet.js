@@ -9,9 +9,10 @@ import HomeTab from "../components/HomeTab";
 import toast, { Toaster } from "react-hot-toast";
 import { handleAirdrop } from "../utils";
 import Menu from "../components/Menu";
+import withAuth from "../HOC/withAuth";
 
-export default function Wallet() {
-  const { account, balance, setBalance, network, price } =
+function Wallet() {
+  const { publicKey, balance, setBalance, network, price } =
     useContext(GlobalContext);
   const [airdropLoading, setAirdropLoading] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -24,8 +25,7 @@ export default function Wallet() {
     setMenuOpen(false);
   };
 
-  const address = account?.publicKey?.toString();
-  const walletAddress = `0x${address?.slice(0, 6)}...${address?.slice(-4)}`;
+  const walletAddress = `0x${publicKey?.slice(0, 6)}...${publicKey?.slice(-4)}`;
 
   const copyAddress = () => {
     navigator.clipboard.writeText(address);
@@ -34,7 +34,7 @@ export default function Wallet() {
 
   const airdrop = async () => {
     setAirdropLoading(true);
-    const res = await handleAirdrop(network, account);
+    const res = await handleAirdrop(network, publicKey);
 
     if (typeof res === "number") {
       setBalance(res);
@@ -126,3 +126,6 @@ export default function Wallet() {
     </div>
   );
 }
+
+
+export default withAuth(Wallet);

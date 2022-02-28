@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
@@ -13,7 +12,7 @@ export default function WalletSetup() {
 
       <img src="/banner2.png" alt="intro" />
 
-      <div>
+      <div width="100%">
         <Link href="/wallet-setup">
           <button className="btn">Use existing wallet</button>
         </Link>

@@ -10,7 +10,12 @@ import { FiArrowUpRight, FiArrowDownLeft } from "react-icons/fi";
 import { GlobalContext } from "../context";
 
 export default function Menu() {
-  const {account} = useContext(GlobalContext);
+  const { publicKey } = useContext(GlobalContext);
+
+  const logOut = () => {
+    
+  }
+
 
   return (
     <div className="menu hide-on-pc">
@@ -21,10 +26,10 @@ export default function Menu() {
       <div className="menu__btns">
         <button className="btn">
           Send
-          <FiArrowUpRight />{" "}
+          <FiArrowUpRight className="icon" />
         </button>
         <button className="btn btn--fill">
-          Add Fund <FiArrowDownLeft />
+          Add Fund <FiArrowDownLeft className="icon" />
         </button>
       </div>
 
@@ -44,8 +49,10 @@ export default function Menu() {
             <GiShare className="icon" /> Share my Public Address
           </a>
         </Link>
-        <Link href={`https://explorer.solana.com/address/&=${"0x"}?cluster=devnet`}>
-          <a className="menu__link">
+        <Link
+          href={`https://explorer.solana.com/address/${publicKey}?cluster=devnet`}
+        >
+          <a className="menu__link" target={"_blank"}>
             <MdTravelExplore className="icon" /> View on solana explorer
           </a>
         </Link>
@@ -54,11 +61,9 @@ export default function Menu() {
             <RiStore2Line className="icon" /> Merchant
           </a>
         </Link>
-        <Link href="#contact">
-          <a className="menu__link">
+        <div className="menu__link" onClick={logOut}>
             <HiOutlineLogout className="icon" /> Log Out
-          </a>
-        </Link>
+          </div>
       </div>
     </div>
   );

@@ -8,20 +8,24 @@ import Link from "next/link";
 import {
   encodeURL,
   findTransactionSignature,
+  FindTransactionSignatureError,
   validateTransactionSignature,
 } from "@solana/pay";
 import { QRCode } from "react-qrcode-logo";
+import withAuth from "../../../HOC/withAuth";
 
-export default function MerchantQr() {
+function MerchantQr() {
   const [paymentStatus, setPaymentStatus] = useState();
   const [url, setUrl] = useState("Hello");
 
   const initiatePayment = async () => {
     // Step 1:- Connecting to the network
     toast.success("Network Connected");
+    console.log("1. ✅ Establish connection to the network");
     const connection = new Connection(clusterApiUrl("devnet"), "confirmed");
 
     // Step 2:- Simulating a customer checkout
+    console.log("2. 🛍 Simulate a customer checkout \n");
     const recipient = new PublicKey(
       "4Swbos81KdH2HcAaZccXBWEk8aDWcARXyFmji4m2vsww"
     );
@@ -32,6 +36,7 @@ export default function MerchantQr() {
     const memo = "INV#10001";
 
     // Step 3:- Create a payment request link
+    console.log("3. 💰 Create a payment request link \n");
     const url = encodeURL({
       recipient,
       amount,
@@ -43,12 +48,17 @@ export default function MerchantQr() {
     setUrl(url);
 
     // Step 4:- Check for payment status
+    console.log("4. 🔐 Simulate wallet interaction \n");
+    // simulateWalletInteraction(connection, url);
     setPaymentStatus("Pending..");
+
+    console.log("\n5. Find the transaction");
     let signatureInfo;
     const { signature } = await new Promise((resolve, reject) => {
       // Recheck payment status until conformed
       const interval = setInterval(async () => {
         // toast.loading("Checking for transaction...");
+        console.count("Checking for transaction...");
         try {
           signatureInfo = await findTransactionSignature(
             connection,
@@ -60,17 +70,18 @@ export default function MerchantQr() {
           clearInterval(interval);
           resolve(signatureInfo);
         } catch (error) {
-          //   if (!(error instanceof FindTransactionSignatureError)) {
-          //     console.error(error);
-          //     clearInterval(interval);
-          //     reject(error);
-          //   }
-          console.log(error);
+          if (!(error instanceof FindTransactionSignatureError)) {
+            console.log(error);
+            clearInterval(interval);
+            reject(error);
+          }
         }
       });
     }, 1000);
+
     setPaymentStatus("Transaction Confirmed");
     // Step 6:- Validating Transaction
+    console.log("\n6. 🔗 Validate transaction \n");
     try {
       await validateTransactionSignature(
         connection,
@@ -128,7 +139,7 @@ export default function MerchantQr() {
         <p>
           <b>Scan this code with your CryptoPay Wallet</b>
           <br />
-         {` You'll be asked to approve the transaction`}
+          {` You'll be asked to approve the transaction`}
           <p className="status">{paymentStatus}</p>
         </p>
       </div>
@@ -137,3 +148,5 @@ export default function MerchantQr() {
     </div>
   );
 }
+
+export default withAuth(MerchantQr);

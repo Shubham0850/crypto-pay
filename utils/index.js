@@ -1,17 +1,24 @@
-import { clusterApiUrl, Connection, LAMPORTS_PER_SOL } from "@solana/web3.js";
+import {
+  clusterApiUrl,
+  Connection,
+  LAMPORTS_PER_SOL,
+  PublicKey,
+} from "@solana/web3.js";
+const CryptoJS = require("crypto-js");
 
-export const updateBalance = async (network, account) => {
-  if (!account) return;
+export const updateBalance = async (network, publicKey) => {
+  if (!publicKey) return;
 
   try {
     // Connect to the blockchain
     const connection = new Connection(clusterApiUrl(network), "confirmed");
 
-    // get publickey
-    const publicKey = account.publicKey;
+    const myAddress = new PublicKey(publicKey);
 
     // get balance
-    const balance = await connection.getBalance(publicKey);
+    const balance = await connection.getBalance(myAddress);
+
+    
 
     return balance / LAMPORTS_PER_SOL;
   } catch (err) {
@@ -19,19 +26,18 @@ export const updateBalance = async (network, account) => {
   }
 };
 
-export const handleAirdrop = async (network, account) => {
-  if (!account) return;
+export const handleAirdrop = async (network, publicKey) => {
+  if (!publicKey) return;
 
   try {
     // Connect to the blockchain
     const connection = new Connection(clusterApiUrl(network), "confirmed");
 
-    // get PublicKey
-    const publicKey = account.publicKey;
+    const myAddress = new PublicKey(publicKey);
 
     // Request for airdrop
     const confirmation = await connection.requestAirdrop(
-      publicKey,
+      myAddress,
       LAMPORTS_PER_SOL
     );
 
@@ -41,8 +47,25 @@ export const handleAirdrop = async (network, account) => {
       "confirmed"
     );
 
-    return await updateBalance(network, account);
+    return await updateBalance(network, publicKey);
   } catch (err) {
     console.log("AirDrop failed: ", err.message);
   }
+};
+
+export const encryptData = (data) => {
+  const encryptedData = CryptoJS.AES.encrypt(
+    JSON.stringify(data),
+    "my-secret-key-@123"
+  ).toString();
+
+  return encryptedData;
+};
+
+export const decryptData = (data) => {
+  const bytes = CryptoJS.AES.decrypt(data, "my-secret-key-@123");
+
+  const decryptedData = bytes.toString(CryptoJS.enc.Utf8);
+
+  return decryptedData;
 };

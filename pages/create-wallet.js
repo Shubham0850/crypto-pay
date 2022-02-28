@@ -5,12 +5,15 @@ import { Keypair } from "@solana/web3.js";
 import { GlobalContext } from "../context";
 import { useRouter } from "next/router";
 import toast, { Toaster } from "react-hot-toast";
+import { decryptData, encryptData } from "../utils";
+const bs58 = require("bs58");
+import Cookies from 'js-cookie'
 
 export default function CreateWallet() {
   const router = useRouter();
   const [phrase, setPhrase] = useState();
   const [copy, setCopy] = useState("Copy Phrase");
-  const { setAccount } = useContext(GlobalContext);
+  const { setPrivateKey, setPublicKey } = useContext(GlobalContext);
 
   const generatePhrase = () => {
     // Generating mnemonic phrase
@@ -20,26 +23,29 @@ export default function CreateWallet() {
   };
 
   const createAccount = () => {
-    toast.loading("Creating Account..");
+    // toast.loading("Creating Account..");
     // convert the mnemonic to seed bytes and making sure it is of 32-bytes
     const seed = Bip39.mnemonicToSeedSync(phrase).slice(0, 32); // return Uint8Array(32)
 
     // Generate new Keypair from seed ( new account )
-    const newAccount = Keypair.fromSeed(seed); // return keypair
+    const keypair = Keypair.fromSeed(seed); // return keypair
 
-    console.log(newAccount);
-//     _keypair:
-// publicKey: 
-// secretKey: Uint8Array(64) 
-// [[Prototype]]: Object
-// publicKey: PublicKey
-// secretKey: Uint8Array(64)
+    // Wallet Public key
+    const pKey = bs58.encode(keypair.secretKey.slice(32));
 
-    // save account on localstorage for now
-    window.localStorage.setItem("wallet", JSON.stringify(newAccount));
+    // setting public key as a cookies & state
+    setPublicKey(pKey);
+    Cookies.set("publicKey", pKey);
 
-    // store newAccount in global state
-    setAccount(newAccount);
+    // Wallet Private Key
+    const sKey = bs58.encode(keypair.secretKey.slice(0, 32));
+
+    // encrypt private key
+    const epKey = encryptData(sKey);
+    console.log("epKey", epKey);
+
+    // setting public key as a cookies
+    Cookies.set("PrivateKey", epKey);
 
     router.push("/wallet");
   };

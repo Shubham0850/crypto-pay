@@ -4,8 +4,9 @@ import { IoQrCodeOutline } from "react-icons/io5";
 import { MdArrowBackIos } from "react-icons/md";
 import MerchantTab from "../../components/MerchantTab";
 import PoweredBy from "../../components/PoweredBy";
+import withAuth from "../../HOC/withAuth";
 
-export default function Merchant() {
+function Merchant() {
   const [amount, setAmount] = useState(0);
 
   return (
@@ -49,3 +50,5 @@ export default function Merchant() {
     </div>
   );
 }
+
+export default withAuth(Merchant);

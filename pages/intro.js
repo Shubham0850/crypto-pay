@@ -3,6 +3,7 @@ import Link from "next/link";
 import React from "react";
 
 export default function Intro() {
+
   return (
     <div className="intro">
       <div className="intro__title">
