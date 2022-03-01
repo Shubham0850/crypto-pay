@@ -124,3 +124,30 @@
     
     
 }
+
+// payment success
+.payment-success{
+    width: 100%;
+    min-height: 90vh;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+
+    &__icon-box{
+        height: 70vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+
+        .icon{
+            font-size: 200px;
+            color: green;
+        }
+        p{
+            padding: 20px;
+        }
+    }
+}

@@ -30,17 +30,6 @@
             font-size: 20px;
         }
 
-        .address{
-            width: fit-content;
-            margin: 10px auto;
-            border-radius: 25px;
-            padding: 5px 20px;
-            background-color: rgba($color-blue, 0.2);
-
-            display: flex;
-            align-items: center;
-        }
-
         .btns{
             margin: 50px 0 0px 0;
             display: flex;
@@ -66,6 +55,17 @@
                 font-size: 14px;
             }
         }
+    }
+
+    .address{
+        width: fit-content;
+        margin: 10px auto;
+        border-radius: 25px;
+        padding: 5px 20px;
+        background-color: rgba($color-blue, 0.2);
+
+        display: flex;
+        align-items: center;
     }
 
     &__profile-img {

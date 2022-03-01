@@ -10,20 +10,12 @@ export default function ScanQr() {
   const [facingMode, setFacingMode] = useState("environment");
 
   const router = useRouter();
-  const readCode = (url) => {
-    const { recipient, amount, splToken, reference, label, message, memo } =
-      parseURL(url);
 
+  const readCode = (url) => {
     router.push({
       pathname: "/make-payment",
       query: {
-        recipient,
-        amount,
-        splToken,
-        reference,
-        label,
-        message,
-        memo,
+        url,
       },
     });
   };

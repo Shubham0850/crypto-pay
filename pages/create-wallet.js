@@ -28,6 +28,7 @@ export default function CreateWallet() {
 
     // Generate new Keypair from seed ( new account )
     const keypair = Keypair.fromSeed(seed); // return keypair
+    console.log("keypair", keypair)
 
     // Wallet Public key
     const pKey = bs58.encode(keypair.secretKey.slice(32));
