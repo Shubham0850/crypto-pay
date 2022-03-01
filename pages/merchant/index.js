@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { IoQrCodeOutline } from "react-icons/io5";
 import { MdArrowBackIos } from "react-icons/md";
@@ -7,7 +8,17 @@ import PoweredBy from "../../components/PoweredBy";
 import withAuth from "../../HOC/withAuth";
 
 function Merchant() {
+  const router = useRouter();
   const [amount, setAmount] = useState(0);
+
+  const generateCode = () => {
+    router.push({
+      pathname: "/merchant/generate-qr",
+      query: {
+        requestAmount: amount,
+      },
+    });
+  };
 
   return (
     <div className="merchant wallet">
@@ -35,17 +46,15 @@ function Merchant() {
           className="inp"
           onChange={(e) => setAmount(e.target.value)}
         />
-        <PoweredBy/>
+        <PoweredBy />
       </div>
 
       <MerchantTab />
 
       <div className="g-code">
-        <Link href="/merchant/generate-qr/1">
-          <button className="btn btn--fill">
-            <IoQrCodeOutline className="icon" /> Generate Payment Code{" "}
-          </button>
-        </Link>
+        <button className="btn btn--fill" onClick={generateCode}>
+          <IoQrCodeOutline className="icon" /> Generate Payment Code{" "}
+        </button>
       </div>
     </div>
   );
