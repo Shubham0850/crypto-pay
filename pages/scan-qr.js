@@ -12,12 +12,8 @@ export default function ScanQr() {
   const router = useRouter();
 
   const readCode = (url) => {
-    router.push({
-      pathname: "/make-payment",
-      query: {
-        url,
-      },
-    });
+    localStorage.setItem("url", url);
+    router.push("/make-payment");
   };
 
   const changeCam = () => {

@@ -9,10 +9,10 @@ export default function PaymentSuccess(props) {
       <div className="payment-success__icon-box">
         <div>
           <BsShieldCheck className="icon" />
-          <p>Transaction Successful</p>
-          <h3>
+          <h4>Transaction Successful</h4>
+          <p>
             Paid {props.amount} SOL to {props.storeName} at {props.time}
-          </h3>
+          </p>
         </div>
       </div>
 

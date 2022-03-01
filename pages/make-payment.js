@@ -1,81 +1,69 @@
-import { createTransaction, parseURL } from "@solana/pay";
-import {
-  clusterApiUrl,
-  Connection,
-  Keypair,
-  PublicKey,
-  sendAndConfirmTransaction,
-} from "@solana/web3.js";
-import BigNumber from "bignumber.js";
+import { parseURL } from "@solana/pay";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useContext, useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { AiOutlineScan } from "react-icons/ai";
 import { BiCopy } from "react-icons/bi";
-import { IoQrCodeOutline } from "react-icons/io5";
 import { MdArrowBackIos, MdGppGood } from "react-icons/md";
 import { VscLoading } from "react-icons/vsc";
 import PaymentSuccess from "../components/PaymentSuccess";
 import { GlobalContext } from "../context";
-import { updateBalance } from "../utils";
+import { getCustomerWallet, handleTransaction, updateBalance } from "../utils";
 
 export default function MakePayment() {
   const { publicKey, balance, network } = useContext(GlobalContext);
-  const [paymentConfirm, setPaymentConfirm] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [paymentConfirm, setPaymentConfirm] = useState(false);
   const router = useRouter();
-  const { url } = router.query;
-
-  const parsedUrl = url ? parseURL(url) : { label: "", message: "" };
-
-  // Keypair purely for testing purposes. Exists only on devnet
-  const CUSTOMER_WALLET = Keypair.fromSecretKey(
-    Uint8Array.from([
-      87, 99, 78, 15, 182, 105, 253, 75, 39, 245, 79, 67, 78, 121, 214, 77, 94,
-      14, 60, 89, 104, 70, 208, 189, 18, 5, 174, 103, 63, 37, 174, 194, 187,
-      125, 203, 89, 177, 225, 152, 179, 26, 86, 13, 131, 207, 209, 89, 56, 76,
-      192, 16, 112, 131, 55, 176, 233, 173, 177, 155, 43, 24, 237, 28, 95,
-    ])
+  const [defUrl, setDefUrl] = useState(
+    "solana:mvines9iiHiQTysrwkJjGf2gb9Ex9jXJX8ns3qwf2kN?amount=0.01&reference=82ZJ7nbGpixjeDCmEhUcmwXYfvurzAgGdtSMuHnUgyny&label=Michael&message=Thanks%20for%20all%20the%20fish&memo=OrderId5678"
   );
 
-  const confirmTransaction = async () => {
-    const { recipient, memo, amount, reference } = parsedUrl;
+  const { recipient, memo, amount, reference, label, message } =
+    parseURL(defUrl);
 
+  useEffect(() => {
+    const url = localStorage.getItem("url");
+    setDefUrl(url);
+    console.log("url", url);
+  }, []);
+
+  const confirmTransaction = () => {
     setLoading(true);
-    const connection = new Connection(clusterApiUrl(network), "confirmed");
+    const signer = getCustomerWallet();
 
-    const tx = await createTransaction(
-      connection,
-      new PublicKey(publicKey),
+    const transactionDetails = {
       recipient,
+      memo,
       amount,
-      {
-        reference,
-        memo,
-      }
-    );
+      reference,
+      signer,
+      network,
+      publicKey,
+    };
 
-    sendAndConfirmTransaction(connection, tx, [CUSTOMER_WALLET])
+    handleTransaction(transactionDetails)
       .then((res) => {
+        console.log(res);
         setPaymentConfirm(true);
+        (async () => {
+          await updateBalance(network, publicKey);
+        })();
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+      });
   };
-
-  paymentConfirm &&
-    (async () => {
-      await updateBalance(network, publicKey);
-    })();
 
   const copyAddress = () => {
     navigator.clipboard.writeText(merchantWalletAddress);
     toast.success("Address Copied to clipboard");
   };
 
-  const merchantWalletAddress = `0x${parsedUrl?.recipient
+  const merchantWalletAddress = `0x${recipient
     ?.toString()
-    ?.slice(0, 6)}...${parsedUrl?.recipient?.toString()?.slice(-4)}`;
+    .slice(0, 6)}...${recipient?.toString().slice(-4)}`;
 
   return (
     <div className="wallet make-payment">
@@ -98,20 +86,20 @@ export default function MakePayment() {
 
       {paymentConfirm ? (
         <PaymentSuccess
-          storeName={parsedUrl?.label}
-          amount={parsedUrl?.amount?.toNumber()}
+          storeName={label}
+          amount={amount?.toNumber()}
           time={Date.now()}
         />
       ) : (
         <div className="make-payment__details">
           <div>
-            <h1 className="h1">{parsedUrl?.label}</h1>
-            <p>{parsedUrl?.message}</p>
-            <h2 className="h2">{parsedUrl?.amount?.toNumber()} SOL</h2>
+            <h1 className="h1">{label}</h1>
+            <p>{message}</p>
+            <h2 className="h2">{amount?.toNumber()} SOL</h2>
             <span className="address" onClick={copyAddress}>
               {merchantWalletAddress + "  -"} <BiCopy />
             </span>
-            <p>{parsedUrl?.memo}</p>
+            <p>{memo}</p>
           </div>
           <h3>In your wallet: {balance}</h3>
           {loading ? (

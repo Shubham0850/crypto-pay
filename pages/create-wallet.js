@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 import toast, { Toaster } from "react-hot-toast";
 import { encryptData } from "../utils";
 const bs58 = require("bs58");
-import Cookies from 'js-cookie'
+import Cookies from "js-cookie";
 
 export default function CreateWallet() {
   const router = useRouter();
@@ -28,7 +28,7 @@ export default function CreateWallet() {
 
     // Generate new Keypair from seed ( new account )
     const keypair = Keypair.fromSeed(seed); // return keypair
-    console.log("keypair", keypair)
+    console.log("keypair", keypair);
 
     // Wallet Public key
     const pKey = bs58.encode(keypair.secretKey.slice(32));
@@ -38,7 +38,9 @@ export default function CreateWallet() {
     Cookies.set("publicKey", pKey);
 
     // Wallet Private Key
-    const sKey = bs58.encode(keypair.secretKey.slice(0, 32));
+    // const sKey = bs58.encode(keypair.secretKey);
+    const sKey = keypair.secretKey;
+    console.log(sKey);
 
     // encrypt private key
     const epKey = encryptData(sKey);
