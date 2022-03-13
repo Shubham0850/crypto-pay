@@ -8,6 +8,7 @@ const QrReader = dynamic(() => import("modern-react-qr-reader"), {
   ssr: false,
 });
 import { FiRotateCcw } from "react-icons/fi";
+import { parseCustomUrl } from "../utils";
 
 export default function ScanQr() {
   const [facingMode, setFacingMode] = useState("environment");
@@ -15,12 +16,8 @@ export default function ScanQr() {
   const router = useRouter();
 
   const readCode = (url) => {
-    // console.log(url.slice(0, 6));
-    // if (url?.slice(0, 6) === "solana") {
-    //   localStorage.setItem("url", url);
-    //   router.push("/make-payment");
-    // }
-    // https://cpay.vercel.app/pay?address=
+    const address = parseCustomUrl(url);
+    router.push(`/pay?address=${address}`);
   };
 
   const changeCam = () => {

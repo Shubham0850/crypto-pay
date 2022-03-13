@@ -53,6 +53,11 @@ function Wallet() {
     router.push("/scan-qr");
   };
 
+  const url =
+    "https://cpay.vercel.app/pay?address=4Swbos81KdH2HcAaZccXBWEk8aDWcARXyFmji4m2vsww";
+
+  console.log();
+
   return (
     <div className="wallet">
       <Toaster position="bottom-center" reverseOrder={false} />

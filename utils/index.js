@@ -7,7 +7,7 @@ import {
   PublicKey,
   sendAndConfirmTransaction,
   Transaction,
-  SystemProgram
+  SystemProgram,
 } from "@solana/web3.js";
 import Cookies from "js-cookie";
 const CryptoJS = require("crypto-js");
@@ -157,4 +157,9 @@ export const getCustomerWallet = () => {
   const customerWallet = Keypair.fromSecretKey(Uint8Array.from(secKeyArray));
 
   return customerWallet;
+};
+
+export const parseCustomUrl = (url) => {
+  const address = url?.split("?")[1].split("=")[1];
+  return address;
 };
