@@ -3,9 +3,10 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { MdArrowBackIos } from "react-icons/md";
-// import QrReader from 'modern-react-qr-reader'
 import dynamic from "next/dynamic";
-const QrReader = dynamic(() => import('modern-react-qr-reader'), { ssr: false })
+const QrReader = dynamic(() => import("modern-react-qr-reader"), {
+  ssr: false,
+});
 import { FiRotateCcw } from "react-icons/fi";
 
 export default function ScanQr() {
@@ -14,8 +15,10 @@ export default function ScanQr() {
   const router = useRouter();
 
   const readCode = (url) => {
-    localStorage.setItem("url", url);
-    router.push("/make-payment");
+    if (url) {
+      localStorage.setItem("url", url);
+      router.push("/make-payment");
+    }
   };
 
   const changeCam = () => {
@@ -27,7 +30,7 @@ export default function ScanQr() {
   };
 
   return (
-    <div className="qr-code">
+    <div className="wallet qr-code">
       <nav className="nav">
         <Link href="/wallet">
           <div className="back">
@@ -42,27 +45,15 @@ export default function ScanQr() {
         </div>
       </nav>
 
-      {/* <QrReader
-        facingMode={facingMode}
-        onResult={(result, error) => {
-          console.log(result);
-          if (!!result) {
-            readCode(result?.text);
-          }
-
-          if (!!error) {
-            console.info(error);
-          }
-        }}
-        className="qr-code-cam"
-      /> */}
-
       {typeof window !== "undefined" && (
         <QrReader
           delay={500}
-          onScan={(res) => console.log(res?.text)}
+          onScan={(res) => {
+            readCode(res?.text);
+          }}
           onError={(err) => console.log(err)}
           facingMode={facingMode}
+          className="qr-code-cam"
         />
       )}
     </div>

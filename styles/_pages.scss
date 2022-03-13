@@ -126,16 +126,15 @@
     .qr-code-cam {
         width: 100%;
         height: 100vh;
-
-        div {
-            height: 100vh;
-        }
-
-        video {
-            width: 100vw !important;
+        div, video, section{
+            width: 100%;
             height: 100vh !important;
-
-            object-fit: cover;
+            border: none !important;
+            box-shadow: none !important;
+        }
+        video{
+            width: 100%;
+            height: 100vh !important;
         }
     }
 
