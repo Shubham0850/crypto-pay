@@ -7,7 +7,7 @@ import QrReader from "react-qr-scanner";
 import { FiRotateCcw } from "react-icons/fi";
 
 export default function ScanQr() {
-  const [facingMode, setFacingMode] = useState("environment");
+  const [facingMode, setFacingMode] = useState("rear");
 
   const router = useRouter();
 
@@ -17,10 +17,10 @@ export default function ScanQr() {
   };
 
   const changeCam = () => {
-    if (facingMode === "environment") {
-      setFacingMode("user");
+    if (facingMode === "rear") {
+      setFacingMode("front");
     } else {
-      setFacingMode("environment");
+      setFacingMode("rear");
     }
   };
 
