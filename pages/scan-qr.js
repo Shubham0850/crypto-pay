@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { MdArrowBackIos } from "react-icons/md";
-import { QrReader } from "react-qr-reader";
+import QrReader from "react-qr-scanner";
 import { FiRotateCcw } from "react-icons/fi";
 
 export default function ScanQr() {
@@ -40,7 +40,7 @@ export default function ScanQr() {
         </div>
       </nav>
 
-      <QrReader
+      {/* <QrReader
         facingMode={facingMode}
         onResult={(result, error) => {
           console.log(result);
@@ -53,7 +53,15 @@ export default function ScanQr() {
           }
         }}
         className="qr-code-cam"
-      />
+      /> */}
+
+      {typeof window !== "undefined" && (
+        <QrReader
+          delay={500}
+          onScan={(res) => console.log(res?.text)}
+          onError={(err) => console.log(err)}
+        />
+      )}
     </div>
   );
 }
