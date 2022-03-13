@@ -60,6 +60,7 @@ export default function ScanQr() {
           delay={500}
           onScan={(res) => console.log(res?.text)}
           onError={(err) => console.log(err)}
+          facingMode={"rear"}
         />
       )}
     </div>
