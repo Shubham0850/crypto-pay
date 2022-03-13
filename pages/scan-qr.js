@@ -15,6 +15,7 @@ export default function ScanQr() {
   const router = useRouter();
 
   const readCode = (url) => {
+    console.log(url);
     if (url) {
       localStorage.setItem("url", url);
       router.push("/make-payment");
@@ -49,7 +50,10 @@ export default function ScanQr() {
         <QrReader
           delay={500}
           onScan={(res) => {
-            readCode(res?.text);
+            console.log(res);
+            if (res) {
+              readCode(res);
+            }
           }}
           onError={(err) => console.log(err)}
           facingMode={facingMode}
