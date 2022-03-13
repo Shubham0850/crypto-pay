@@ -15,11 +15,12 @@ export default function ScanQr() {
   const router = useRouter();
 
   const readCode = (url) => {
-    console.log(url);
-    if (url) {
-      localStorage.setItem("url", url);
-      router.push("/make-payment");
-    }
+    // console.log(url.slice(0, 6));
+    // if (url?.slice(0, 6) === "solana") {
+    //   localStorage.setItem("url", url);
+    //   router.push("/make-payment");
+    // }
+    // https://cpay.vercel.app/pay?address=
   };
 
   const changeCam = () => {

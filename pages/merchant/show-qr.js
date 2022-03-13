@@ -13,35 +13,12 @@ import withAuth from "../../HOC/withAuth";
 
 function ShowQr() {
   const [url, setUrl] = useState("Hello");
-  const [pKey, setPKey] = useState();
 
   useEffect(() => {
     const publicKey = Cookies.get("publicKey");
-    console.log(publicKey);
-    setPKey(publicKey);
-
-    if (pKey) {
-      const recipient = new PublicKey(pKey);
-      const amount = new BigNumber(0);
-      const reference = new Keypair().publicKey;
-      const label = "Krishna Store";
-      const message = "General store - all you need";
-      const memo = "INV#10001";
-
-      const urlData = encodeURL({
-        recipient,
-        amount,
-        reference,
-        label,
-        message,
-        memo,
-      });
-
-      setUrl(urlData);
-    }
-  }, [pKey]);
-
-  console.log(pKey);
+    const urlData = `https://cpay.vercel.app/pay?address=${publicKey}`;
+    setUrl(urlData);
+  }, []);
 
   return (
     <div className="show-qr merchant-qr merchant wallet">
