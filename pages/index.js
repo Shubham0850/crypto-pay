@@ -2,6 +2,12 @@ import Cookies from "js-cookie";
 import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import Services from "../components/Home/Services";
+import Header from "../components/Home/Header";
+import Nav from "../components/Home/Nav";
+import Security from "../components/Home/Security";
+import Web3 from "../components/Home/Web3";
+import Features from "../components/Home/Features";
 
 export default function Home() {
   const router = useRouter();
@@ -19,10 +25,12 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <h1>CryptoPay</h1>
-      <Link href="/intro">
-        <button className="btn">Start Now</button>
-      </Link>
+      <Nav/>
+      <Header/>
+      <Services/>
+      <Features/>
+      <Security/>
+      <Web3/>
     </div>
   );
 }

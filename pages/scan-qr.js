@@ -43,6 +43,7 @@ export default function ScanQr() {
       <QrReader
         facingMode={facingMode}
         onResult={(result, error) => {
+          console.log(result);
           if (!!result) {
             readCode(result?.text);
           }

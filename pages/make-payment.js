@@ -15,7 +15,6 @@ export default function MakePayment() {
   const { publicKey, balance, network } = useContext(GlobalContext);
   const [loading, setLoading] = useState(false);
   const [paymentConfirm, setPaymentConfirm] = useState(false);
-  const router = useRouter();
   const [defUrl, setDefUrl] = useState(
     "solana:mvines9iiHiQTysrwkJjGf2gb9Ex9jXJX8ns3qwf2kN?amount=0.01&reference=82ZJ7nbGpixjeDCmEhUcmwXYfvurzAgGdtSMuHnUgyny&label=Michael&message=Thanks%20for%20all%20the%20fish&memo=OrderId5678"
   );
@@ -45,16 +44,19 @@ export default function MakePayment() {
 
     handleTransaction(transactionDetails)
       .then((res) => {
-        console.log(res);
         setPaymentConfirm(true);
-        (async () => {
-          await updateBalance(network, publicKey);
-        })();
+        console.log(res);
+        localStorage.removeItem("url");
       })
       .catch((err) => {
         console.log(err);
       });
   };
+
+  if (paymentConfirm)
+    (async () => {
+      await updateBalance(network, publicKey);
+    })();
 
   const copyAddress = () => {
     navigator.clipboard.writeText(merchantWalletAddress);

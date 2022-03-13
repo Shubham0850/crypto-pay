@@ -18,7 +18,7 @@ export default function Intro() {
       <img src="/banner2.png" alt="intro" />
 
       <Link href="/wallet-setup">
-        <button className="btn">Get Started</button>
+        <button className="butn butn--full">Get Started</button>
       </Link>
     </div>
   );

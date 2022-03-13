@@ -11,6 +11,8 @@ import { handleAirdrop } from "../utils";
 import Menu from "../components/Menu";
 import withAuth from "../HOC/withAuth";
 import { useRouter } from "next/router";
+import { MdHistory } from "react-icons/md";
+import Link from "next/link";
 
 function Wallet() {
   const { publicKey, balance, setBalance, network, price } =
@@ -48,8 +50,8 @@ function Wallet() {
   };
 
   const scanQrCode = () => {
-      router.push("/scan-qr")
-  }
+    router.push("/scan-qr");
+  };
 
   return (
     <div className="wallet">
@@ -71,13 +73,16 @@ function Wallet() {
 
         <p>Wallet</p>
 
-        <div className="network">
+        {/* <div className="network">
           <select className="section">
             <option>Devnet</option>
             <option>Testnet</option>
             <option>Mainnet</option>
           </select>
-        </div>
+        </div> */}
+        <Link href="/history">
+          <MdHistory className="icon" />
+        </Link>
       </nav>
 
       <div className="wallet__profile">
@@ -127,11 +132,12 @@ function Wallet() {
       <HomeTab />
 
       <div className="s-pay">
-        <button onClick={scanQrCode} className="btn btn--fill"><AiOutlineScan className="icon"/> Scan and Pay</button>
+        <button onClick={scanQrCode} className="butn butn--fill mx-auto">
+          <AiOutlineScan className="icon" /> Scan and Pay
+        </button>
       </div>
     </div>
   );
 }
-
 
 export default withAuth(Wallet);

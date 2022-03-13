@@ -90,19 +90,19 @@ export default function CreateWallet() {
         <img src="/banner2.png" alt="intro" />
       )}
 
-      <div className="btns">
+      <div className="butns">
         {phrase && (
-          <button className="btn" onClick={copyPhrase}>
+          <button className="butn butn--full" onClick={copyPhrase}>
             {copy}
           </button>
         )}
 
         {!phrase ? (
-          <button className="btn btn--fill" onClick={generatePhrase}>
+          <button className="butn butn--fill butn--full" onClick={generatePhrase}>
             Generate Phrase
           </button>
         ) : (
-          <button className="btn btn--fill" onClick={createAccount}>
+          <button className="butn butn--fill butn--full" onClick={createAccount}>
             Create Wallet
           </button>
         )}

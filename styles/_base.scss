@@ -26,7 +26,7 @@ $font-secondary: "Euclid SemiBold";
 // color
 $color-font: #333333;
 $color-blue: #249192;
-$color-gray: #ededed;
+$color-gray: #F7F9FB;
 
 * {
     margin: 0;
@@ -40,11 +40,14 @@ $color-gray: #ededed;
     font-family: $font-secondary;
     font-size: 48px;
 }
+.header-h1{
+    font-size: 70px;
+}
 .p {
     font-family: $font-primary;
     font-size: 16px;
     line-height: 22px;
-    color: $color-font;
+    color: #4a5056;
 }
 .h3 {
     font-family: $font-secondary;
@@ -59,6 +62,9 @@ $color-gray: #ededed;
     .p {
         font-size: 16px;
     }
+    .header-h1{
+        font-size: 45px;
+    }
 }
 
 // BASE STYLE
@@ -71,11 +77,11 @@ $color-gray: #ededed;
     font-size: 25px;
     margin: 0 10px;
 }
-.btns {
+.butns {
     width: 100%;
 }
-.btn {
-    width: 100%;
+.butn {
+    width: fit-content;
     max-width: 400px;
     margin: 10px 0;
     padding: 12px 30px;
@@ -108,11 +114,52 @@ $color-gray: #ededed;
         font-size: 25px;
         margin-right: 10px;
     }
+
+    &--full{
+        width: 100%;
+    }
+
+    &--2{
+        padding: 0;
+        border: none;
+        color: $color-font;
+        font-size: 13px;
+        border-radius: 0;
+
+        &:hover{
+            text-decoration: underline;
+        }
+    }
 }
 .inp {
     border: none;
     outline: none;
     font-family: $font-primary;
+}
+.inp-txt{
+    border: 1px solid #ededed;
+    padding: 10px 15px;
+    font-size: 15px;
+    outline: none;
+    width: 100%;
+    text-align: center;
+}
+.section{
+    width: 100%;
+    max-width: 1450px;
+    margin: 0 auto;
+
+    &--big{
+        max-width: 1600px;
+    }
+}
+a{
+    text-decoration: none !important;
+    color: $color-font !important;
+
+    &:hover{
+        color: #000 !important;
+    }
 }
 
 @media only screen and (max-width: 600px) {

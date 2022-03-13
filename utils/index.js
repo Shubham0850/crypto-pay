@@ -6,6 +6,8 @@ import {
   LAMPORTS_PER_SOL,
   PublicKey,
   sendAndConfirmTransaction,
+  Transaction,
+  SystemProgram
 } from "@solana/web3.js";
 import Cookies from "js-cookie";
 const CryptoJS = require("crypto-js");
@@ -73,6 +75,59 @@ export const handleAirdrop = async (network, publicKey) => {
   } catch (err) {
     console.log("AirDrop failed: ", err.message);
   }
+};
+
+export const sendToken = async (transactionDetails) => {
+  const { fromPubKey, toPubKey, amount, signer, network } = transactionDetails;
+
+  const connection = new Connection(clusterApiUrl(network), "confirmed");
+
+  const instructions = SystemProgram.transfer({
+    fromPubkey: fromPubKey,
+    toPubkey: toPubKey,
+    lamports: amount,
+  });
+
+  const transaction = new Transaction().add(instructions);
+
+  const confirmation = await sendAndConfirmTransaction(
+    connection,
+    transaction,
+    [signer]
+  );
+
+  await updateBalance(network, fromPubKey);
+
+  return confirmation;
+};
+
+export const paymentHistory = async (publickey, network) => {
+  if (!publickey) return;
+
+  const connection = new Connection(clusterApiUrl(network), "confirmed");
+
+  const transSignatures = await connection.getConfirmedSignaturesForAddress2(
+    new PublicKey(publickey)
+  );
+
+  const transactions = [];
+
+  for (let i = 0; i < transSignatures.length; i++) {
+    const signature = transSignatures[i].signature;
+    const confirmedTransaction = await connection.getConfirmedTransaction(
+      signature
+    );
+    if (confirmedTransaction) {
+      const { meta } = confirmedTransaction;
+      const feeAmount = confirmedTransaction?.meta?.fee / LAMPORTS_PER_SOL;
+      const transactionAmount =
+        (meta.preBalances[0] - meta.postBalances[0]) / LAMPORTS_PER_SOL;
+
+      transactions.push({ feeAmount, transactionAmount });
+    }
+  }
+
+  return transactions;
 };
 
 export const encryptData = (data) => {

@@ -6,16 +6,13 @@ import { RiHistoryLine, RiStore2Line } from "react-icons/ri";
 import { GiShare } from "react-icons/gi";
 import { MdTravelExplore } from "react-icons/md";
 import { HiOutlineLogout } from "react-icons/hi";
-import { FiArrowUpRight, FiArrowDownLeft } from "react-icons/fi";
+import { FiArrowUpRight, FiArrowDownLeft, FiSettings } from "react-icons/fi";
 import { GlobalContext } from "../context";
 
 export default function Menu() {
   const { publicKey } = useContext(GlobalContext);
 
-  const logOut = () => {
-    
-  }
-
+  const logOut = () => {};
 
   return (
     <div className="menu hide-on-pc">
@@ -23,12 +20,12 @@ export default function Menu() {
         <img src="/logo2.png" alt="logo" />
       </div>
 
-      <div className="menu__btns">
-        <button className="btn">
+      <div className="menu__butns px-3">
+        <button className="butn butn--full">
           Send
           <FiArrowUpRight className="icon" />
         </button>
-        <button className="btn btn--fill">
+        <button className="butn butn--fill butn--full">
           Add Fund <FiArrowDownLeft className="icon" />
         </button>
       </div>
@@ -62,8 +59,13 @@ export default function Menu() {
           </a>
         </Link>
         <div className="menu__link" onClick={logOut}>
-            <HiOutlineLogout className="icon" /> Log Out
-          </div>
+          <HiOutlineLogout className="icon" /> Log Out
+        </div>
+        <Link href="/setting">
+          <a className="menu__link">
+            <FiSettings className="icon" /> Setting
+          </a>
+        </Link>
       </div>
     </div>
   );

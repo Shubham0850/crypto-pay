@@ -12,12 +12,12 @@ export default function WalletSetup() {
 
       <img src="/banner2.png" alt="intro" />
 
-      <div width="100%">
+      <div className="butns">
         <Link href="/wallet-setup">
-          <button className="btn">Use existing wallet</button>
+          <button className="butn butn--full">Use existing wallet</button>
         </Link>
         <Link href="/create-wallet">
-          <button className="btn btn--fill">Create wallet</button>
+          <button className="butn butn--fill butn--full">Create wallet</button>
         </Link>
       </div>
     </div>
