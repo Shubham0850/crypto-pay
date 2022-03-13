@@ -3,11 +3,13 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { MdArrowBackIos } from "react-icons/md";
-import QrReader from "react-qr-scanner";
+// import QrReader from 'modern-react-qr-reader'
+import dynamic from "next/dynamic";
+const QrReader = dynamic(() => import('modern-react-qr-reader'), { ssr: false })
 import { FiRotateCcw } from "react-icons/fi";
 
 export default function ScanQr() {
-  const [facingMode, setFacingMode] = useState("rear");
+  const [facingMode, setFacingMode] = useState("environment");
 
   const router = useRouter();
 
@@ -17,10 +19,10 @@ export default function ScanQr() {
   };
 
   const changeCam = () => {
-    if (facingMode === "rear") {
-      setFacingMode("front");
+    if (facingMode === "environment") {
+      setFacingMode("user");
     } else {
-      setFacingMode("rear");
+      setFacingMode("environment");
     }
   };
 
@@ -60,7 +62,7 @@ export default function ScanQr() {
           delay={500}
           onScan={(res) => console.log(res?.text)}
           onError={(err) => console.log(err)}
-          facingMode={"rear"}
+          facingMode={facingMode}
         />
       )}
     </div>
