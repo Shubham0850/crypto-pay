@@ -14,6 +14,7 @@ import {
 import { QRCode } from "react-qrcode-logo";
 import withAuth from "../../HOC/withAuth";
 import { useRouter } from "next/router";
+import NavBar from "../../components/common/NavBar";
 
 function MerchantQr() {
   const [paymentStatus, setPaymentStatus] = useState();
@@ -197,19 +198,14 @@ function MerchantQr() {
 
   return (
     <div className="merchant-qr wallet">
-      <nav className="nav">
-        <Link href="/merchant">
-          <div className="back">
-            <MdArrowBackIos className="icon" /> Cancel
-          </div>
-        </Link>
+     
 
-        <h3>Krishna Store</h3>
-
-        <div className="network">
-          <VscLoading className="loading icon" />
-        </div>
-      </nav>
+      <NavBar
+        firstLink="/merchant"
+        title="Krishna Store"
+        secondLink="/merchant/generate-qr"
+        secondIcon={<VscLoading className="loading icon" />}
+      />
 
       <div className="merchant-qr__qr-box">
         <div>

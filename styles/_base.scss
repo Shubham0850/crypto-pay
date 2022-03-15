@@ -153,6 +153,11 @@ $color-gray: #F7F9FB;
         max-width: 1600px;
     }
 }
+.sm-bm-5{
+    @media only screen and (max-width: 600px){
+        margin-bottom: 25px;
+    }
+}
 a{
     text-decoration: none !important;
     color: $color-font !important;

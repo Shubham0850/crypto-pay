@@ -21,7 +21,7 @@ export default function Security() {
           <Col
             sm={12}
             md={6}
-            className="d-flex align-items-center justify-content-center"
+            className="d-flex align-items-center justify-content-center sm-mb-5"
           >
             <img src="/secure.png" alt="guard" width={"300px"} />
           </Col>
@@ -46,30 +46,34 @@ export default function Security() {
         </Row>
 
         <Row className="security__row2">
-          <Col sm={12} md={3} className="safety__card">
-            <Image src="/icons/1.svg" width={80} height={80} />
-            <h5>Military-grade Security</h5>
-            <p className="p">Storage held in military-grade Class III vaults</p>
-          </Col>
-          <Col sm={12} md={3} className="safety__card">
-            <Image src="/icons/2.svg" width={80} height={80} />
-            <h5>Third-party Audits</h5>
+          <Col sm={12} md={3} className="safety__card sm-mb-5">
+            <Image src="/key.webp" width={80} height={80} />
+            <h5>Non-Custodial</h5>
             <p className="p">
-              Independent, real-time reserves audit by Armanino
+              We never have access to any of your data or funds. Ever
             </p>
           </Col>
-          <Col sm={12} md={3} className="safety__card">
-            <Image src="/icons/3.svg" width={80} height={80} />
-            <h5>ISO 27001:2013 Certified</h5>
+          <Col sm={12} md={3} className="safety__card sm-mb-5">
+            <Image src="/wallet.webp" width={80} height={80} />
+            <h5>Ledger Support</h5>
             <p className="p">
-              Impeccable risk assessment, data protection, and enhanced
-              cybersecurity
+              For additional security you can connect your hardware wallet.{" "}
             </p>
           </Col>
-          <Col sm={12} md={3} className="safety__card">
-            <Image src="/icons/4.svg" width={80} height={80} />
-            <h5>$375 million Insurance</h5>
-            <p className="p">Disinfection wash of all raw vegetables</p>
+          <Col sm={12} md={3} className="safety__card sm-mb-5">
+            <Image src="/lock.webp" width={80} height={80} />
+            <h5>Privacy</h5>
+            <p className="p">
+              We never track any personal identifiable information, your account
+              addresses, or asset balances.
+            </p>
+          </Col>
+          <Col sm={12} md={3} className="safety__card sm-mb-5">
+            <Image src="/biometric.webp" width={80} height={80} />
+            <h5>Biometric authentication</h5>
+            <p className="p">
+              Protect your assets on the go with the convenience you expect.
+            </p>
           </Col>
         </Row>
       </Container>

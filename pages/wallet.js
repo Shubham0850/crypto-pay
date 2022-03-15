@@ -1,17 +1,17 @@
 import React, { useContext, useState } from "react";
-import { GlobalContext } from "../context";
 import { BsMenuApp, BsCreditCard2Back } from "react-icons/bs";
-import { BiCopy } from "react-icons/bi";
-import { FaParachuteBox } from "react-icons/fa";
 import { ImArrowDownLeft2, ImArrowUpRight2 } from "react-icons/im";
 import { AiOutlineLoading, AiOutlineScan } from "react-icons/ai";
-import HomeTab from "../components/HomeTab";
 import toast, { Toaster } from "react-hot-toast";
-import { handleAirdrop } from "../utils";
-import Menu from "../components/Menu";
-import withAuth from "../HOC/withAuth";
-import { useRouter } from "next/router";
+import { FaParachuteBox } from "react-icons/fa";
+import HomeTab from "../components/HomeTab";
 import { MdHistory } from "react-icons/md";
+import { GlobalContext } from "../context";
+import { handleAirdrop } from "../utils";
+import { BiCopy } from "react-icons/bi";
+import { useRouter } from "next/router";
+import withAuth from "../HOC/withAuth";
+import Menu from "../components/Menu";
 import Link from "next/link";
 
 function Wallet() {
@@ -21,6 +21,8 @@ function Wallet() {
   const [menuOpen, setMenuOpen] = useState(false);
   const router = useRouter();
 
+  const walletAddress = `0x${publicKey?.slice(0, 6)}...${publicKey?.slice(-4)}`;
+
   const openMenu = () => {
     setMenuOpen(true);
   };
@@ -29,10 +31,8 @@ function Wallet() {
     setMenuOpen(false);
   };
 
-  const walletAddress = `0x${publicKey?.slice(0, 6)}...${publicKey?.slice(-4)}`;
-
   const copyAddress = () => {
-    navigator.clipboard.writeText(address);
+    navigator.clipboard.writeText(walletAddress);
     toast.success("Address Copied to clipboard");
   };
 
@@ -48,15 +48,6 @@ function Wallet() {
 
     console.log(res);
   };
-
-  const scanQrCode = () => {
-    router.push("/scan-qr");
-  };
-
-  const url =
-    "https://cpay.vercel.app/pay?address=4Swbos81KdH2HcAaZccXBWEk8aDWcARXyFmji4m2vsww";
-
-  console.log();
 
   return (
     <div className="wallet">
@@ -76,7 +67,7 @@ function Wallet() {
           <BsMenuApp className="icon" />
         </div>
 
-        <p>Wallet</p>
+        <h4>Wallet</h4>
 
         {/* <div className="network">
           <select className="section">
@@ -115,12 +106,14 @@ function Wallet() {
             </span>
             <p className="p">Buy</p>
           </div>
-          <div>
-            <span className="b">
-              <ImArrowUpRight2 />
-            </span>
-            <p className="p">Send</p>
-          </div>
+          <Link href="/send-token">
+            <div>
+              <span className="b">
+                <ImArrowUpRight2 />
+              </span>
+              <p className="p">Send</p>
+            </div>
+          </Link>
           <div>
             <span className="b" onClick={airdrop}>
               {airdropLoading ? (
@@ -137,9 +130,11 @@ function Wallet() {
       <HomeTab />
 
       <div className="s-pay">
-        <button onClick={scanQrCode} className="butn butn--fill mx-auto">
-          <AiOutlineScan className="icon" /> Scan and Pay
-        </button>
+        <Link href="/scan-qr">
+          <button className="butn butn--fill mx-auto">
+            <AiOutlineScan className="icon" /> Scan and Pay
+          </button>
+        </Link>
       </div>
     </div>
   );

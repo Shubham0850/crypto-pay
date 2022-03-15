@@ -7,6 +7,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { GiShare } from "react-icons/gi";
 import { MdArrowBackIos } from "react-icons/md";
 import { QRCode } from "react-qrcode-logo";
+import NavBar from "../../components/common/NavBar";
 import PoweredBy from "../../components/PoweredBy";
 import { GlobalContext } from "../../context";
 import withAuth from "../../HOC/withAuth";
@@ -22,19 +23,13 @@ function ShowQr() {
 
   return (
     <div className="show-qr merchant-qr merchant wallet">
-      <nav className="nav">
-        <Link href="/merchant">
-          <div className="back">
-            <MdArrowBackIos className="icon" /> Back
-          </div>
-        </Link>
 
-        <h3>Krishna Store</h3>
-
-        <div className="network">
-          <GiShare className="icon" />
-        </div>
-      </nav>
+      <NavBar
+        firstLink="/merchant"
+        title="Krishna Store"
+        secondLink="/merchant/show-qr"
+        secondIcon={ <GiShare className="icon" />}
+      />
 
       <div className="merchant-qr__qr-box">
         <div>

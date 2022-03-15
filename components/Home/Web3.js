@@ -6,10 +6,9 @@ export default function Web3() {
   return (
     <div className="web3">
       <Container fluid className="section">
-        <h1 className="h1">Access WEB3 with ease</h1>
+        <h1 className="h1 mb-5">Access WEB3 with ease</h1>
 
         <Row>
-          <Col></Col>
           <Col>
             <Image
               src="/icons/chrome.svg"
@@ -40,7 +39,6 @@ export default function Web3() {
             <div className="web3__browser">FireFox</div>
           </Col>
 
-          <Col></Col>
         </Row>
       </Container>
     </div>

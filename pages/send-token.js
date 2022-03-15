@@ -4,6 +4,7 @@ import React, { useContext, useState } from "react";
 import { IoQrCodeOutline } from "react-icons/io5";
 import { MdArrowBackIos, MdGppGood } from "react-icons/md";
 import { VscLoading } from "react-icons/vsc";
+import NavBar from "../components/common/NavBar";
 import PoweredBy from "../components/PoweredBy";
 import { GlobalContext } from "../context";
 import { getCustomerWallet, sendToken } from "../utils";
@@ -39,21 +40,12 @@ export default function SendToken() {
 
   return (
     <div className="merchant wallet">
-      <nav className="nav">
-        <Link href="/wallet">
-          <div className="back">
-            <MdArrowBackIos className="icon" /> Back
-          </div>
-        </Link>
-
-        <h3>Send Token</h3>
-
-        <Link href="/merchant/show-qr">
-          <div className="network">
-            <IoQrCodeOutline className="icon" />
-          </div>
-        </Link>
-      </nav>
+      <NavBar
+        firstLink="/wallet"
+        title="Send Token"
+        secondLink="/merchant/show-qr"
+        secondIcon={<IoQrCodeOutline className="icon" />}
+      />
 
       <div className="merchant__enter-amount">
         <p>Enter amount in SOL</p>
@@ -80,7 +72,7 @@ export default function SendToken() {
           Processing ..
         </button>
       ) : (
-        <button className="btn" onClick={sendTransaction}>
+        <button className="butn mx-auto" onClick={sendTransaction}>
           <MdGppGood className="icon" />
           Send
         </button>

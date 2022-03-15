@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { IoQrCodeOutline } from "react-icons/io5";
 import { MdArrowBackIos } from "react-icons/md";
+import NavBar from "../../components/common/NavBar";
 import MerchantTab from "../../components/MerchantTab";
 import PoweredBy from "../../components/PoweredBy";
 import withAuth from "../../HOC/withAuth";
@@ -22,21 +23,12 @@ function Merchant() {
 
   return (
     <div className="merchant wallet">
-      <nav className="nav">
-        <Link href="/wallet">
-          <div className="back">
-            <MdArrowBackIos className="icon" /> Back
-          </div>
-        </Link>
-
-        <h3>Krishna Store</h3>
-
-        <Link href="/merchant/show-qr">
-          <div className="network">
-            <IoQrCodeOutline className="icon" />
-          </div>
-        </Link>
-      </nav>
+      <NavBar
+        firstLink="/wallet"
+        title="Krishna Store"
+        secondLink="/merchant/show-qr"
+        secondIcon={<IoQrCodeOutline className="icon" />}
+      />
 
       <div className="merchant__enter-amount">
         <p>Enter bill amount in SOL</p>
@@ -52,7 +44,7 @@ function Merchant() {
       <MerchantTab />
 
       <div className="g-code">
-        <button className="btn btn--fill" onClick={generateCode}>
+        <button className="butn butn--fill mx-auto" onClick={generateCode}>
           <IoQrCodeOutline className="icon" /> Generate Payment Code{" "}
         </button>
       </div>

@@ -5,45 +5,89 @@ export default function Features() {
   return (
     <div className="features">
       <Container>
-        <Row>
-          <div className="features__box">
-            <div>
-              <h1 className="h1">Home for all your NFTs</h1>
-              <p className="p">
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry.
-              </p>
-            </div>
+        <Row className="features__box sm-mb-5">
+          <Col sm={12} md={6}>
+            <h1 className="h1">Home for all your NFTs</h1>
+            <p className="p">
+              Lorem Ipsum is simply dummy text of the printing and typesetting
+              industry.
+            </p>
+          </Col>
 
-            <div>
-              <img src="/nfts.jpg" alt="nft" width={"300px"} />
-            </div>
-          </div>
+          <Col sm={12} md={6} className="features__box__img">
+            <img src="/nft.webp" alt="nft" />
+          </Col>
         </Row>
 
-        <div className="d-flex justify-content-center">
-          <div className="features__box features__box2">
-            <div>
-              <h1 className="h1">Earn Cashbacks</h1>
-              <p className="p mb-5">
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry.
-              </p>
-              <img src="/cashback.webp" alt="nft" className="mt-5" />
-            </div>
-          </div>
+        <Row className="features__box sm-mb-5">
+          <Col sm={12} md={6}>
+            <h1 className="h1">Earn Cashbacks</h1>
+            <p className="p">
+              Lorem Ipsum is simply dummy text of the printing and typesetting
+              industry.
+            </p>
+          </Col>
 
-          <div className="features__box features__box2">
-            <div>
-              <h1 className="h1">Swap with ease</h1>
-              <p className="p mb-5">
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry.
-              </p>
-              <img src="/swap.png" alt="nft" className="mt-5" />
-            </div>
-          </div>
-        </div>
+          <Col sm={12} md={6} className="features__box__img">
+            <img src="/cashback.webp" alt="nft" />
+          </Col>
+        </Row>
+
+        <Row className="features__box sm-mb-5">
+          <Col sm={12} md={6}>
+            <h1 className="h1">Swap with ease</h1>
+            <p className="p">
+              Lorem Ipsum is simply dummy text of the printing and typesetting
+              industry.
+            </p>
+          </Col>
+
+          <Col sm={12} md={6} className="features__box__img">
+            <img src="/swap.webp" alt="nft" />
+          </Col>
+        </Row>
+
+        <Row className="features__box sm-mb-5">
+          <Col sm={12} md={6}>
+            <h1 className="h1">Access Dapps</h1>
+            <p className="p">
+              Lorem Ipsum is simply dummy text of the printing and typesetting
+              industry.
+            </p>
+          </Col>
+
+          <Col sm={12} md={6} className="features__box__img">
+            <img src="/solana-dapps.webp" alt="nft" />
+          </Col>
+        </Row>
+
+        <Row className="features__box sm-mb-5">
+          <Col sm={12} md={6}>
+            <h1 className="h1">Pay to Merchants</h1>
+            <p className="p">
+              Lorem Ipsum is simply dummy text of the printing and typesetting
+              industry.
+            </p>
+          </Col>
+
+          <Col sm={12} md={6} className="features__box__img">
+            <img src="/merchant.webp" alt="nft" />
+          </Col>
+        </Row>
+
+        <Row className="features__box">
+          <Col sm={12} md={6}>
+            <h1 className="h1">Get Cash with ease</h1>
+            <p className="p">
+              Lorem Ipsum is simply dummy text of the printing and typesetting
+              industry.
+            </p>
+          </Col>
+
+          <Col sm={12} md={6} className="features__box__img">
+            <img src="/cash.webp" alt="nft" />
+          </Col>
+        </Row>
       </Container>
     </div>
   );

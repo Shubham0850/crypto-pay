@@ -110,20 +110,38 @@ export const paymentHistory = async (publickey, network) => {
     new PublicKey(publickey)
   );
 
+  console.log(transSignatures);
+
   const transactions = [];
 
   for (let i = 0; i < transSignatures.length; i++) {
     const signature = transSignatures[i].signature;
+
+    const customTransaction = {
+      signature,
+    };
+
     const confirmedTransaction = await connection.getConfirmedTransaction(
       signature
     );
-    if (confirmedTransaction) {
-      const { meta } = confirmedTransaction;
-      const feeAmount = confirmedTransaction?.meta?.fee / LAMPORTS_PER_SOL;
-      const transactionAmount =
-        (meta.preBalances[0] - meta.postBalances[0]) / LAMPORTS_PER_SOL;
 
-      transactions.push({ feeAmount, transactionAmount });
+    if (confirmedTransaction) {
+      const { meta, transaction } = confirmedTransaction;
+
+      customTransaction.feeAmount =
+        confirmedTransaction?.meta?.fee / LAMPORTS_PER_SOL;
+      customTransaction.amount =
+        (meta.preBalances[0] - meta.postBalances[0]) / LAMPORTS_PER_SOL;
+      customTransaction.sender =
+        transaction.instructions[0].keys[0].pubkey.toBase58();
+      customTransaction.senderBalance =
+        meta?.postBalances[0] / LAMPORTS_PER_SOL;
+      customTransaction.receiver =
+        transaction.instructions[0].keys[1].pubkey.toBase58();
+      customTransaction.receiverBalance =
+        meta?.postBalances[1] / LAMPORTS_PER_SOL;
+
+      transactions.push(customTransaction);
     }
   }
 

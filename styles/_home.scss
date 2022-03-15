@@ -2,13 +2,20 @@
 .nav {
     background-color: $color-gray;
     padding: 10px 0;
+    border-bottom: 1px solid #ededed;
 }
 
 // Header
 .header {
     padding: 50px 25px;
+    border-bottom: 1px solid #ededed;
     &__row {
         min-height: 80vh;
+
+        @media only screen and (max-width: 600px){
+            flex-direction: column-reverse;
+            justify-content: space-around;
+        }
     }
 }
 
@@ -16,6 +23,7 @@
 .services {
     width: 100%;
     padding: 50px 0;
+    border-bottom: 1px solid #ededed;
 
     &__card {
         overflow: hidden;
@@ -56,7 +64,7 @@
 .security {
     width: 100%;
     padding: 80px 25px;
-    background-color: $color-gray;
+    border-bottom: 1px solid #ededed;
 
     &__row1 {
         margin-bottom: 80px;
@@ -69,8 +77,9 @@
 
 // web3
 .web3 {
-    padding: 80px 0;
+    padding: 80px 25px;
     text-align: center;
+    background-color: $color-gray;
 
     .h1 {
         margin-bottom: 80px;
@@ -79,19 +88,32 @@
 
 // Features
 .features {
-    padding: 100px 0;
+    padding: 100px 25px;
     background-color: $color-gray;
+    border-bottom: 1px solid #ededed;
 
     &__box {
         background-color: #fff;
         border-radius: 15px;
         padding: 20px;
         max-width: 1100px !important;
-        margin: 10px auto;
         display: flex;
         align-items: center;
         justify-content: space-around;
         box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
+
+        &__img{
+            img{
+                width: 100%;
+            }
+        }
+
+        .h1{
+            margin-bottom: 10px !important;
+        }
+        .p{
+            margin-bottom: 20px !important;
+        }
     }
 
     &__box2 {

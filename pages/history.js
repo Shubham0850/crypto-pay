@@ -1,21 +1,13 @@
-import {
-  clusterApiUrl,
-  Connection,
-  LAMPORTS_PER_SOL,
-  PublicKey,
-} from "@solana/web3.js";
-import BigNumber from "bignumber.js";
-import Link from "next/link";
 import React, { useContext, useEffect, useState } from "react";
 import { IoQrCodeOutline } from "react-icons/io5";
-import { MdArrowBackIos } from "react-icons/md";
+import NavBar from "../components/common/NavBar";
 import { GlobalContext } from "../context";
 import { paymentHistory } from "../utils";
 
 export default function History() {
   const [loading, setLoading] = useState(true);
   const [transactions, setTransactions] = useState([]);
-  const { publicKey, balance, network } = useContext(GlobalContext);
+  const { publicKey, network } = useContext(GlobalContext);
 
   useEffect(() => {
     paymentHistory(publicKey, network)
@@ -29,31 +21,44 @@ export default function History() {
 
   return (
     <div className="history wallet">
-      <nav className="nav">
-        <Link href="/wallet">
-          <div className="back">
-            <MdArrowBackIos className="icon" /> Back
-          </div>
-        </Link>
-
-        <h3>Payment History</h3>
-
-        <Link href="/merchant/show-qr">
-          <div className="network">
-            <IoQrCodeOutline className="icon" />
-          </div>
-        </Link>
-      </nav>
+      <NavBar
+        firstLink="/wallet"
+        title="Payment History"
+        secondLink="/merchant/show-qr"
+        secondIcon={<IoQrCodeOutline className="icon" />}
+      />
 
       {loading && <p>Loading..</p>}
 
-      {transactions?.map((el) => (
-        <div key={el.key}>
-          <p>
-            {el?.feeAmount} - {el?.transactionAmount}
-          </p>
-        </div>
-      ))}
+      {transactions?.map(
+        ({
+          feeAmount,
+          amount,
+          signature,
+          sender,
+          senderBalance,
+          receiver,
+          receiverBalance,
+        }) => (
+          <div className="history__card" key={1}>
+            <p>
+              fees {feeAmount}
+              <br />
+              Transaction {amount - feeAmount}
+              <br />
+              Signature: {signature}
+              <br />
+              sender: {sender}
+              <br />
+              senderBalance: {senderBalance}
+              <br />
+              receiver: {receiver}
+              <br />
+              receiverBalance: {receiverBalance}
+            </p>
+          </div>
+        )
+      )}
     </div>
   );
 }
