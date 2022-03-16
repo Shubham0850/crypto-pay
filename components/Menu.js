@@ -43,7 +43,7 @@ export default function Menu() {
             <IoWalletOutline className="icon" /> Wallet
           </a>
         </Link>
-        <Link href="/offers">
+        <Link href="/history">
           <a className="menu__link">
             <RiHistoryLine className="icon" /> Transaction History
           </a>
