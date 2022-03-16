@@ -7,7 +7,6 @@ import { AiOutlineScan } from "react-icons/ai";
 import { BiCopy } from "react-icons/bi";
 import { MdArrowBackIos, MdGppGood } from "react-icons/md";
 import { VscLoading } from "react-icons/vsc";
-import PaymentSuccess from "../components/PaymentSuccess";
 import { GlobalContext } from "../context";
 import { getCustomerWallet, handleTransaction, updateBalance } from "../utils";
 
@@ -86,37 +85,29 @@ export default function MakePayment() {
         </Link>
       </nav>
 
-      {paymentConfirm ? (
-        <PaymentSuccess
-          storeName={label}
-          amount={amount?.toNumber()}
-          time={Date.now()}
-        />
-      ) : (
-        <div className="make-payment__details">
-          <div>
-            <h1 className="h1">{label}</h1>
-            <p>{message}</p>
-            <h2 className="h2">{amount?.toNumber()} SOL</h2>
-            <span className="address" onClick={copyAddress}>
-              {merchantWalletAddress + "  -"} <BiCopy />
-            </span>
-            <p>{memo}</p>
-          </div>
-          <h3>In your wallet: {balance}</h3>
-          {loading ? (
-            <button className="btn" onClick={confirmTransaction}>
-              <VscLoading className="icon loading" />
-              Processing ..
-            </button>
-          ) : (
-            <button className="btn" onClick={confirmTransaction}>
-              <MdGppGood className="icon" />
-              Confirm
-            </button>
-          )}
+      <div className="make-payment__details">
+        <div>
+          <h1 className="h1">{label}</h1>
+          <p>{message}</p>
+          <h2 className="h2">{amount?.toNumber()} SOL</h2>
+          <span className="address" onClick={copyAddress}>
+            {merchantWalletAddress + "  -"} <BiCopy />
+          </span>
+          <p>{memo}</p>
         </div>
-      )}
+        <h3>In your wallet: {balance}</h3>
+        {loading ? (
+          <button className="btn" onClick={confirmTransaction}>
+            <VscLoading className="icon loading" />
+            Processing ..
+          </button>
+        ) : (
+          <button className="btn" onClick={confirmTransaction}>
+            <MdGppGood className="icon" />
+            Confirm
+          </button>
+        )}
+      </div>
     </div>
   );
 }

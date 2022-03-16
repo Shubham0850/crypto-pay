@@ -8,7 +8,7 @@ function Card(props) {
       <img src={props.logoSrc} alt="crypto" />
 
       <div className="token-card__name">
-        <h3>{props.coinName}</h3>
+        <h3 className="h3">{props.coinName}</h3>
         <p>
           {props.balance} {props.symbol}
         </p>
@@ -22,13 +22,12 @@ function Card(props) {
 export default function Tokens() {
   const { balance, price } = useContext(GlobalContext);
 
-
   return (
     <div className="tokens">
       <Card
         logoSrc="https://tradingplatforms.com/wp-content/uploads/2021/11/solana_logo.png"
         coinName="Solana"
-        balance={balance}
+        balance={balance?.toFixed(3)}
         symbol="SOL"
         price={price}
       />

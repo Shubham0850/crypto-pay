@@ -107,14 +107,15 @@
 .wallet {
     .s-pay {
         width: 100%;
-        position: absolute;
+        position: fixed;
         bottom: 20px;
         left: 0;
         text-align: center;
 
-        .btn {
+        .butn {
             width: fit-content;
             margin: 0 auto;
+            box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
         }
     }
 }

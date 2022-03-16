@@ -136,6 +136,12 @@ $color-gray: #F7F9FB;
     outline: none;
     font-family: $font-primary;
 }
+.textarea{
+    border: 1px solid #ededed;
+    border-radius: 15px;
+    font-size: 20px;
+    padding: 15px;
+}
 .inp-txt{
     border: 1px solid #ededed;
     padding: 10px 15px;
@@ -143,6 +149,7 @@ $color-gray: #F7F9FB;
     outline: none;
     width: 100%;
     text-align: center;
+    border-radius: 12px;
 }
 .section{
     width: 100%;

@@ -141,6 +141,11 @@ export const paymentHistory = async (publickey, network) => {
       customTransaction.receiverBalance =
         meta?.postBalances[1] / LAMPORTS_PER_SOL;
 
+      customTransaction.transactionType =
+        publickey === transaction.instructions[0].keys[0].pubkey.toBase58()
+          ? "debit"
+          : "credit";
+
       transactions.push(customTransaction);
     }
   }

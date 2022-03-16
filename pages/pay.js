@@ -5,6 +5,8 @@ import React, { useContext, useState } from "react";
 import { AiOutlineScan } from "react-icons/ai";
 import { MdArrowBackIos, MdGppGood } from "react-icons/md";
 import { VscLoading } from "react-icons/vsc";
+import NavBar from "../components/common/NavBar";
+import Tokens from "../components/Tokens";
 import { GlobalContext } from "../context";
 import { getCustomerWallet, sendToken } from "../utils";
 
@@ -15,6 +17,8 @@ export default function Pay() {
   const [loading, setLoading] = useState(false);
   const [confirm, setConfirm] = useState(false);
   const [amount, setAmount] = useState(0);
+
+  const payingTo = `0x${address?.slice(0, 6)}...${address?.slice(-4)}`;
 
   const sendTransaction = async () => {
     setLoading(true);
@@ -31,6 +35,14 @@ export default function Pay() {
     sendToken(transactionDetails)
       .then((res) => {
         setLoading(false);
+        router.push({
+          pathname: "/payment-success",
+          query: {
+            amount,
+            to: address,
+            time: Date.now(),
+          },
+        });
         console.log(res);
       })
       .catch((err) => {
@@ -39,22 +51,13 @@ export default function Pay() {
   };
 
   return (
-    <div className="wallet Pay">
-      <nav className="nav">
-        <Link href="/wallet">
-          <div className="back">
-            <MdArrowBackIos className="icon" /> Back
-          </div>
-        </Link>
-
-        <h3>Confirm Transaction</h3>
-
-        <Link href="/merchant/show-qr">
-          <div className="network">
-            <AiOutlineScan className="icon" />
-          </div>
-        </Link>
-      </nav>
+    <div className="merchant wallet">
+      <NavBar
+        firstLink="/wallet"
+        title="Make Payment"
+        secondLink="/scan-qr"
+        secondIcon={<AiOutlineScan className="icon" />}
+      />
 
       <div className="merchant__enter-amount">
         <p>Enter bill amount in SOL</p>
@@ -65,19 +68,37 @@ export default function Pay() {
           onChange={(e) => setAmount(e.target.value)}
         />
       </div>
-      <p>In your wallet: {balance}</p>
 
-      {loading ? (
-        <button className="butn">
-          <VscLoading className="icon loading" />
-          Processing ..
-        </button>
-      ) : (
-        <button className="butn" onClick={sendTransaction}>
-          <MdGppGood className="icon" />
-          Send
-        </button>
-      )}
+      <p className="p text-center">
+        Available Balance: {balance.toFixed(3)} SOL
+      </p>
+      <Tokens />
+
+      <div className="s-pay">
+        <p className="p">
+          Paying to{" "}
+          <a
+            className="link"
+            href={`https://explorer.solana.com/address/${address}?cluster=devnet`}
+          >
+            {payingTo}
+          </a>
+        </p>
+        {loading ? (
+          <button className="butn mx-auto butn--full">
+            <VscLoading className="icon loading" />
+            Processing ..
+          </button>
+        ) : (
+          <button
+            className="butn butn--full butn--fill mx-auto"
+            onClick={sendTransaction}
+          >
+            <MdGppGood className="icon" />
+            Send
+          </button>
+        )}
+      </div>
     </div>
   );
 }

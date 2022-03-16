@@ -2,20 +2,32 @@
     width: 100%;
     border-top: 1px solid $color-gray;
 
+    background-color: #fff !important;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-around !important;
     align-items: center;
+    padding: 0 !important;
+    box-shadow: none !important;
 
-    &__tab {
-        width: 50%;
-        padding: 20px;
-        text-align: center;
+    .nav-item{
+        width: 50% !important;
+        
+        button{
+            outline: none !important;
+            width: 100% !important;
+            margin: 0 auto !important;
+            padding: 15px 0 !important;
+            color: #888 !important;
+        }
+        .active{
+            background-color: transparent !important;
+            border: none !important;
+            border-bottom: 2px solid $color-blue !important;
+            color: $color-blue !important;
+        }
     }
 
-    .active {
-        border-top: 2px solid $color-blue;
-        color: $color-blue;
-    }
+   
 }
 
 .nav{
@@ -40,7 +52,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin: 20px;
+    margin: 15px;
     padding: 10px;
 
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
@@ -53,6 +65,13 @@
 
     &__name {
         min-width: 65%;
+
+        .h3{
+            font-size: 18px;
+        }
+    }
+    .amount{
+        line-height: 18px;
     }
 }
 
@@ -136,11 +155,11 @@
 // payment success
 .payment-success{
     width: 100%;
-    min-height: 90vh;
+    min-height: 100vh;
 
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
 
     &__icon-box{
@@ -158,4 +177,29 @@
             padding: 20px;
         }
     }
+
+    .link{
+        text-decoration: underline !important;
+        color: $color-blue !important;
+    }
+}
+
+.history{
+    &__card{
+        &__box{
+            width: 50px;
+            height: 50px;
+            background-color: $color-blue;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+    }
+}
+
+.tab{
+    padding-bottom: 70px;
 }

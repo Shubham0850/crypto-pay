@@ -43,7 +43,7 @@ function Merchant() {
 
       <MerchantTab />
 
-      <div className="g-code">
+      <div className="s-pay">
         <button className="butn butn--fill mx-auto" onClick={generateCode}>
           <IoQrCodeOutline className="icon" /> Generate Payment Code{" "}
         </button>

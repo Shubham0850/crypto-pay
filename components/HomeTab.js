@@ -1,20 +1,23 @@
 import React from "react";
+import { Tabs, Tab } from "react-bootstrap";
+import Nfts from "./Nfts";
 import Tokens from "./Tokens";
 
 export default function HomeTab() {
   return (
     <div className="tab">
-      <div className="home-tab">
-        <div className="home-tab__tab active">
-          <p className="p">{`Tokens`}</p>
-        </div>
-
-        <div className="home-tab__tab">
-          <p className="p">{"NFTs"}</p>
-        </div>
-      </div>
-
-      <Tokens/>
+      <Tabs
+        defaultActiveKey="token"
+        id="uncontrolled-tab-example"
+        className="home-tab"
+      >
+        <Tab eventKey="token" title="Tokens">
+          <Tokens />
+        </Tab>
+        <Tab eventKey="nft" title="NFT's">
+          <Nfts />
+        </Tab>
+      </Tabs>
     </div>
   );
 }

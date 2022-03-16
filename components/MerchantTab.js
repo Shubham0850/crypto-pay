@@ -1,20 +1,22 @@
 import React from "react";
-import Tokens from "./Tokens";
+import { Tabs, Tab } from "react-bootstrap";
+import History from "./common/History";
 
 export default function MerchantTab() {
   return (
     <div className="tab">
-      <div className="home-tab">
-        <div className="home-tab__tab active">
-          <p className="p">{`Today`}</p>
-        </div>
-
-        <div className="home-tab__tab">
-          <p className="p">{"All Payments"}</p>
-        </div>
-      </div>
-
-      <Tokens/>
+      <Tabs
+        defaultActiveKey="today"
+        id="uncontrolled-tab-example"
+        className="home-tab"
+      >
+        <Tab eventKey="today" title="Today Payment">
+          {typeof window !== "undefined" && <History />}
+        </Tab>
+        <Tab eventKey="all" title="All Payment">
+          {typeof window !== "undefined" && <History />}
+        </Tab>
+      </Tabs>
     </div>
   );
 }

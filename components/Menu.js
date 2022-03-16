@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import Cookies from "js-cookie";
 import Link from "next/link";
 
 import { IoWalletOutline } from "react-icons/io5";
@@ -8,11 +9,17 @@ import { MdTravelExplore } from "react-icons/md";
 import { HiOutlineLogout } from "react-icons/hi";
 import { FiArrowUpRight, FiArrowDownLeft, FiSettings } from "react-icons/fi";
 import { GlobalContext } from "../context";
+import { useRouter } from "next/router";
 
 export default function Menu() {
   const { publicKey } = useContext(GlobalContext);
+  const router = useRouter();
 
-  const logOut = () => {};
+  const logOut = () => {
+    Cookies.remove("publicKey");
+    Cookies.remove("PrivateKey");
+    router.push("/");
+  };
 
   return (
     <div className="menu hide-on-pc">

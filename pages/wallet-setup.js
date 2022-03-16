@@ -5,7 +5,7 @@ export default function WalletSetup() {
   return (
     <div className="intro wallet-setup">
       <div className="intro__title">
-        <img src="/logo2.png" alt="logo"  />
+        <img src="/logo2.png" alt="logo" />
         <h3 className="h3">Wallet setup</h3>
         <p className="p">Import an existing wallet or create a new one</p>
       </div>
@@ -13,7 +13,7 @@ export default function WalletSetup() {
       <img src="/banner2.png" alt="intro" />
 
       <div className="butns">
-        <Link href="/wallet-setup">
+        <Link href="/recover-wallet">
           <button className="butn butn--full">Use existing wallet</button>
         </Link>
         <Link href="/create-wallet">
