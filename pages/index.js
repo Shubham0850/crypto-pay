@@ -1,4 +1,6 @@
+import Cookies from "js-cookie";
 import Head from "next/head";
+import { useRouter } from "next/router";
 import Services from "../components/Home/Services";
 import Header from "../components/Home/Header";
 import Nav from "../components/Home/Nav";
@@ -7,6 +9,10 @@ import Web3 from "../components/Home/Web3";
 import Features from "../components/Home/Features";
 
 export default function Home() {
+  const router = useRouter();
+  const pKey = Cookies.get("publicKey");
+
+  if (pKey) router.push("/wallet");
 
   return (
     <div>

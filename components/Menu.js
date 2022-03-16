@@ -70,9 +70,14 @@ export default function Menu() {
         </div>
         <Link href="/setting">
           <a className="menu__link">
-            <FiSettings className="icon" /> Setting
+            <FiSettings className="icon" /> Staking
           </a>
         </Link>
+        {/* <Link href="/setting">
+          <a className="menu__link">
+            <FiSettings className="icon" /> Setting
+          </a>
+        </Link> */}
       </div>
     </div>
   );
