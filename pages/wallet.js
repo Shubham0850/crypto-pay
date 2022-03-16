@@ -88,7 +88,9 @@ function Wallet() {
         </div>
         <div>
           <h3 className="h3 mb-3">Account 1</h3>
-          <p className="p balance mb-3">$ {(price * balance).toFixed(2)}</p>
+          <p className="p balance mb-3">
+            ₹ {(price * balance).toFixed(2)}
+          </p>
           <span className="address" onClick={copyAddress}>
             {walletAddress + "  -"} <BiCopy />
           </span>

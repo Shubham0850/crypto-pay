@@ -39,8 +39,7 @@ const Card = ({
         </div>
 
         <p className="amount">
-          <b>{amount?.toFixed(2)}</b>
-          <br /> SOL
+          ₹ {amount?.toFixed(2)}
         </p>
       </div>
     </a>
@@ -50,7 +49,7 @@ const Card = ({
 export default function History() {
   const [loading, setLoading] = useState(true);
   const [transactions, setTransactions] = useState([]);
-  const { publicKey, network } = useContext(GlobalContext);
+  const { publicKey, network, price } = useContext(GlobalContext);
 
   const history = async () => {
     const res = await paymentHistory(publicKey, network);
@@ -89,7 +88,7 @@ export default function History() {
             signature={signature}
             receiver={receiver}
             sender={sender}
-            amount={amount - feeAmount}
+            amount={(amount - feeAmount)*price}
             transactionType={transactionType}
             key={key}
           />

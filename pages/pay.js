@@ -1,9 +1,8 @@
 import { LAMPORTS_PER_SOL, PublicKey } from "@solana/web3.js";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useContext, useState } from "react";
 import { AiOutlineScan } from "react-icons/ai";
-import { MdArrowBackIos, MdGppGood } from "react-icons/md";
+import { MdGppGood } from "react-icons/md";
 import { VscLoading } from "react-icons/vsc";
 import NavBar from "../components/common/NavBar";
 import Tokens from "../components/Tokens";
@@ -13,10 +12,9 @@ import { getCustomerWallet, sendToken } from "../utils";
 export default function Pay() {
   const router = useRouter();
   const { address } = router.query;
-  const { publicKey, balance, network } = useContext(GlobalContext);
+  const { publicKey, balance, network, price } = useContext(GlobalContext);
   const [loading, setLoading] = useState(false);
-  const [confirm, setConfirm] = useState(false);
-  const [amount, setAmount] = useState(0);
+  const [amountInSol, setAmountInSol] = useState(0);
 
   const payingTo = `0x${address?.slice(0, 6)}...${address?.slice(-4)}`;
 
@@ -27,7 +25,7 @@ export default function Pay() {
     const transactionDetails = {
       fromPubKey: new PublicKey(publicKey),
       toPubKey: new PublicKey(address),
-      amount: LAMPORTS_PER_SOL * amount,
+      amount: LAMPORTS_PER_SOL * amountInSol,
       signer,
       network,
     };
@@ -38,7 +36,7 @@ export default function Pay() {
         router.push({
           pathname: "/payment-success",
           query: {
-            amount,
+            amount: amountInSol,
             to: address,
             time: Date.now(),
           },
@@ -60,12 +58,14 @@ export default function Pay() {
       />
 
       <div className="merchant__enter-amount">
-        <p>Enter bill amount in SOL</p>
+        <p>Amount in SOL {amountInSol.toFixed(6)}</p>
         <input
           type={"number"}
-          placeholder="0"
+          placeholder="₹0"
           className="inp"
-          onChange={(e) => setAmount(e.target.value)}
+          onChange={(e) => {
+            setAmountInSol(e.target.value / price);
+          }}
         />
       </div>
 
@@ -75,7 +75,7 @@ export default function Pay() {
       <Tokens />
 
       <div className="s-pay">
-        <p className="p">
+        <p className="p mb-3">
           Paying to{" "}
           <a
             className="link"
@@ -85,13 +85,13 @@ export default function Pay() {
           </a>
         </p>
         {loading ? (
-          <button className="butn mx-auto butn--full">
+          <button className="butn mx-auto butn--fill">
             <VscLoading className="icon loading" />
             Processing ..
           </button>
         ) : (
           <button
-            className="butn butn--full butn--fill mx-auto"
+            className="butn butn--full butn--fill"
             onClick={sendTransaction}
           >
             <MdGppGood className="icon" />
