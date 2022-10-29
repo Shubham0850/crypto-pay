@@ -71,6 +71,22 @@
             margin: 10px auto;
         }
     }
+
+    &__register{
+        padding: 10px;
+
+        .h3{
+            margin: 10px 0 20px 0 !important;
+        }
+
+        .input{
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ededed;
+            border-radius: 10px;
+        }
+    }
 }
 
 .merchant-qr {
